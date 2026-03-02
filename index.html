@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sweet Tapioca Cafe — Boba Tea, Bingsu & Macarons in Chesterfield, MO</title>
+  <meta name="description" content="Sweet Tapioca Cafe is Chesterfield's only boba tea shop. Handcrafted milk teas, fruit teas, Korean bingsu, artisan macarons, smoothies & catering. Hilltown Village Center, Chesterfield MO 63017."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Sweet Tapioca Cafe",
+    "description": "Chesterfield's only boba tea cafe serving handcrafted milk teas, fruit teas, Korean bingsu, artisan macarons, smoothies and catering at Hilltown Village Center.",
+    "address": {"@type":"PostalAddress","streetAddress":"123 Hilltown Village Center","addressLocality":"Chesterfield","addressRegion":"MO","postalCode":"63017"},
+    "openingHours": ["Tu-Fr 12:00-20:30","Sa 09:00-21:00","Su 11:00-21:00"],
+    "telephone": "+16367781212",
+    "email": "sweettapiocacafe.desserts@gmail.com",
+    "url": "https://www.sweettapiocacafe.com",
+    "servesCuisine": ["Boba Tea","Korean Desserts","Taiwanese Tea"],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f2f0ed;
+      color: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── TOP ANNOUNCEMENT BANNER ─── */
+    /* Matches the dark teal strip at very top of MAG */
+    .top-banner {
+      background: #25a4dd;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      background: #f2f0ed;
+      border-bottom: 1px solid rgba(14,37,88,0.1);
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 2.5rem;
+      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      margin-right: 2rem;
+      text-decoration: none;
+    }
+
+    /* Logo placeholder styles removed — using real logo image */
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #0e2558;
+      opacity: 0.65;
+      padding: 0.45rem 0.9rem;
+      border-right: 1px solid rgba(14,37,88,0.18);
+      white-space: nowrap;
+      transition: opacity 0.18s ease;
+    }
+    .nav-links a:first-child { border-left: 1px solid rgba(14,37,88,0.18); }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+    /* ─── HERO BAND ─── */
+    /* Matches the dark italic "Your customers are already looking for this" strip */
+    .hero-band {
+      background: #0e2558;
+      padding: 2.25rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .hero-band-text {
+      max-width: 640px;
+    }
+    .hero-band-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.55rem;
+    }
+    .hero-band h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+      font-weight: 800;
+      font-style: italic;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .hero-band p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+    }
+    .hero-band-cta a {
+      display: inline-block;
+      background: #ffffff;
+      color: #0e2558;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.85rem 1.75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: background 0.18s, color 0.18s;
+    }
+    .hero-band-cta a:hover { background: #0e2558; color: #fff; }
+
+    /* ─── MAIN TWO-COL SECTION ─── */
+    .main-section {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .main-photo {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .main-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* LEFT — flavors */
+    .flavors-col {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+    }
+    .flavors-col h2 {
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 800;
+      color: #0e2558;
+      margin-bottom: 0.65rem;
+      line-height: 1.15;
+    }
+    .flavors-col .order-btn {
+      display: inline-block;
+      border: 1.5px solid rgba(14,37,88,0.3);
+      color: #0e2558;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+      transition: all 0.18s;
+    }
+    .flavors-col .order-btn:hover {
+      background: #0e2558;
+      color: #fff;
+      border-color: #0e2558;
+    }
+
+    /* Category blobs row */
+    .cat-row {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      margin-top: 0.5rem;
+    }
+    .cat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      flex: 1;
+    }
+    .cat-item span {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #0e2558;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .blob {
+      position: relative;
+      width: 120px;
+      height: 145px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.22s ease;
+    }
+    .cat-item:hover .blob { transform: translateY(-4px); }
+    .blob svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .blob-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      z-index: 1;
+      display: block;
+      padding: 10px;
+    }
+    /* Each blob's color bleeds through as background, hiding black photo edges */
+    .cat-item:nth-child(1) .blob { background: #0e2558; border-radius: 50% 45% 52% 48% / 48% 50% 52% 50%; }
+    .cat-item:nth-child(2) .blob { background: #2f3192; border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%; }
+    .cat-item:nth-child(3) .blob { background: #25a4dd; border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+    .cat-item:nth-child(4) .blob { background: #2f3192; border-radius: 52% 48% 50% 50% / 50% 52% 48% 50%; }
+    .cat-item:nth-child(5) .blob { background: #0e2558; border-radius: 50% 48% 52% 45% / 50% 52% 48% 50%; }
+    /* Center blob is the accent blue */
+    .blob-center svg path { fill: #25a4dd; }
+
+    /* RIGHT — announcements card */
+    .ann-card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+    }
+    .ann-card-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(14,37,88,0.45);
+      margin-bottom: 0.5rem;
+    }
+    .ann-card h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0e2558;
+      margin-bottom: 1.25rem;
+      line-height: 1.2;
+    }
+    .ann-list { list-style: none; }
+    .ann-list li {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #0e2558;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #f0ede9;
+      line-height: 1.45;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .ann-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .ann-list li::before {
+      content: '•';
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .ann-list a {
+      color: #0e2558;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .ann-list a:hover { color: #25a4dd; }
+    .ann-list sup { font-size: 0.6em; }
+
+    .ann-divider {
+      height: 1px;
+      background: #e8e4df;
+      margin: 1.25rem 0;
+    }
+    .ann-hours-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(14,37,88,0.4);
+      margin-bottom: 0.6rem;
+    }
+    .ann-hours p {
+      font-size: 0.75rem;
+      color: #526288;
+      line-height: 1.9;
+    }
+
+    /* ─── PERKS STRIP ─── */
+    .perks-strip {
+      background: #0e2558;
+      padding: 1rem 2rem;
+    }
+    .perks-inner {
+      max-width: 1100px;
+      padding: 0;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: nowrap;
+    }
+    .perk {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.88);
+      white-space: nowrap;
+    }
+    .perk-divider {
+      width: 1px;
+      height: 1.2rem;
+      background: rgba(255,255,255,0.2);
+      flex-shrink: 0;
+    }
+
+    /* ─── CARDS SECTION below photo ─── */
+    .cards-section-wrap {
+      max-width: 1100px;
+      margin: 2.5rem auto 3rem;
+      padding: 0 2rem;
+    }
+    .cards-section-header {
+      margin-bottom: 1.5rem;
+    }
+    .cards-section-header .eyebrow {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(14,37,88,0.45);
+      margin-bottom: 0.5rem;
+    }
+    .cards-section-header h2 {
+      font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+      font-weight: 800;
+      font-style: italic;
+      color: #0e2558;
+      line-height: 1.2;
+    }
+
+    .three-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .card {
+      background: #ffffff;
+      border: 1.5px solid #e4e0db;
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .card.featured {
+      border-color: #0e2558;
+    }
+    .card-icon {
+      font-size: 1.85rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #0e2558;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .card p {
+      font-size: 0.8rem;
+      color: #526288;
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+    .card-btn {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 0.65rem 1.4rem;
+      border-radius: 4px;
+      transition: all 0.18s;
+    }
+    .card-btn-dark {
+      background: #0e2558;
+      color: #fff;
+    }
+    .card-btn-dark:hover { background: #25a4dd; }
+    .card-btn-outline {
+      border: 1.5px solid rgba(14,37,88,0.3);
+      color: #0e2558;
+    }
+    .card-btn-outline:hover { background: #0e2558; color: #fff; border-color: #0e2558; }
+
+    /* ─── REVIEWS ─── */
+    .reviews-section {
+      background: #ffffff;
+      padding: 3.5rem 2rem;
+    }
+    .reviews-inner {
+      max-width: 1100px;
+      padding: 0;
+      margin: 0 auto;
+    }
+    .reviews-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(14,37,88,0.45);
+      margin-bottom: 1.75rem;
+      text-align: center;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+    .review-card {
+      background: #f2f0ed;
+      border-radius: 8px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .review-card-featured {
+      background: #0e2558;
+    }
+    .review-card-featured .review-stars,
+    .review-card-featured .review-text,
+    .review-card-featured .review-author { color: #ffffff; }
+    .review-card-featured .review-author { opacity: 0.6; }
+    .review-stars {
+      color: #f5a623;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+    .review-text {
+      font-size: 0.82rem;
+      color: #0e2558;
+      line-height: 1.75;
+      font-style: italic;
+      flex: 1;
+    }
+    .review-author {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(14,37,88,0.45);
+    }
+    .reviews-cta {
+      display: block;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #25a4dd;
+      letter-spacing: 0.05em;
+      transition: opacity 0.18s;
+    }
+    .reviews-cta:hover { opacity: 0.7; }
+
+    /* ─── VISIT US ─── */
+    .visit-section {
+      background: #f2f0ed;
+      padding: 3.5rem 2rem;
+    }
+    .visit-inner {
+      max-width: 1100px;
+      padding: 0;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .visit-eyebrow {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(14,37,88,0.45);
+      margin-bottom: 0.5rem;
+    }
+    .visit-text h2 {
+      font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+      font-weight: 800;
+      color: #0e2558;
+      line-height: 1.2;
+      margin-bottom: 0.85rem;
+    }
+    .visit-text > p {
+      font-size: 0.82rem;
+      color: #526288;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .visit-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .visit-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .visit-detail-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(14,37,88,0.4);
+    }
+    .visit-detail span:last-child {
+      font-size: 0.8rem;
+      color: #0e2558;
+      line-height: 1.7;
+    }
+    .visit-detail a { color: #25a4dd; }
+    .visit-detail a:hover { text-decoration: underline; }
+    .visit-map {
+      height: 380px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(14,37,88,0.1);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0e2558;
+      color: rgba(255,255,255,0.55);
+      padding: 2.5rem 2.5rem 1.75rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      padding: 0 0 2rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    footer h4 {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #25a4dd;
+      margin-bottom: 0.85rem;
+    }
+    footer p, footer address {
+      font-style: normal;
+      font-size: 0.78rem;
+      line-height: 1.9;
+    }
+    footer a { color: rgba(255,255,255,0.55); transition: color 0.18s; }
+    footer a:hover { color: #25a4dd; }
+    .footer-social { display: flex; gap: 0.6rem; margin-top: 0.75rem; }
+    .footer-social a {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.58rem; font-weight: 800; color: rgba(255,255,255,0.5);
+      transition: all 0.18s;
+    }
+    .footer-social a:hover { background: #25a4dd; border-color: #25a4dd; color: #fff; }
+    .footer-bottom {
+      max-width: 1100px;
+      padding: 0;
+      margin: 1.5rem auto 0;
+      font-size: 0.68rem;
+      text-align: center;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 820px) {
+
+      /* Global */
+      body { overflow-x: hidden; }
+
+      /* Banner */
+      .top-banner { font-size: 0.65rem; padding: 0.6rem 1rem; text-align: center; }
+
+      /* Nav */
+      nav { padding: 0.75rem 1rem; }
+      .nav-links { gap: 0.75rem; }
+      .nav-links a { font-size: 0.55rem; }
+
+      /* Hero */
+      .hero-band {
+        flex-direction: column;
+        padding: 1.75rem 1.25rem;
+        gap: 1.25rem;
+      }
+      .hero-band-cta { width: 100%; }
+      .hero-band-cta a { width: 100%; text-align: center; display: block; box-sizing: border-box; }
+
+      /* Main two-col → single col */
+      .main-section {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+        margin: 1.25rem auto;
+        gap: 1.25rem;
+      }
+
+      /* Left col: flavors + photo stack naturally */
+      .left-col { gap: 1rem; }
+      .main-photo img { max-height: 260px; }
+
+      /* Blobs: allow wrap on very small screens */
+      .cat-row { flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+      .cat-item { flex: 0 0 auto; }
+
+      /* Perks strip: wrap to 2×2 */
+      .perks-inner { flex-wrap: wrap; justify-content: center; gap: 0.5rem; padding: 0; }
+      .perk { padding: 0.3rem 0.75rem; font-size: 0.7rem; }
+      .perk-divider { display: none; }
+
+      /* Cards section */
+      .cards-section-wrap {
+        padding: 0 1rem;
+        margin: 1.5rem auto 2rem;
+      }
+      .cards-section-header { text-align: center; }
+      .three-cards { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+
+      /* Reviews */
+      .reviews-section { padding: 2.5rem 1rem; }
+      .reviews-inner { padding: 0; }
+      .reviews-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto 1.5rem; }
+
+      /* Visit / Map */
+      .visit-section { padding: 2.5rem 1rem; }
+      .visit-inner {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        padding: 0;
+      }
+      .visit-map { height: 280px; }
+
+      /* Footer */
+      .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      footer { padding: 2.5rem 1.25rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BANNER -->
+<div class="top-banner">
+  Now serving Chesterfield, Wildwood, Ballwin &amp; West St. Louis County &nbsp;·&nbsp; Call us to book your event: <a href="tel:+16367781212" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">(636) 778-1212</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="Sweet Tapioca Logo.png" alt="Sweet Tapioca Cafe" style="height:85px;width:auto;display:block;" />
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="events.html">Events &amp; Catering</a>
+  </div>
+</nav>
+
+<!-- HERO BAND -->
+<div class="hero-band">
+  <div class="hero-band-text">
+    <p class="hero-band-label">Chesterfield's only boba cafe &nbsp;·&nbsp; Locally owned &amp; operated &nbsp;·&nbsp; Hilltown Village Center</p>
+    <h1>Independent. Handcrafted. Chesterfield's favorite boba cafe — serving handcrafted drinks, Korean bingsu, and artisan macarons.</h1>
+  </div>
+  <div class="hero-band-cta">
+    <a href="https://www.clover.com/online-ordering/sweet-tapioca-cafe" target="_blank" rel="noopener">Order for Pick Up →</a>
+  </div>
+</div>
+
+<!-- MAIN: flavors left + announcements right -->
+<div class="main-section">
+
+  <!-- LEFT: Fresh Flavors + Photo stacked -->
+  <div class="left-col">
+  <div class="flavors-col">
+    <h2>Fresh flavors for every mood</h2>
+    <a href="https://www.clover.com/online-ordering/sweet-tapioca-cafe" target="_blank" rel="noopener" class="order-btn">Order for pick up</a>
+
+    <!-- Category blobs -->
+    <div class="cat-row">
+      <a href="menu.html#milk-fruit" class="cat-item">
+        <div class="blob">
+          <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#0e2558" d="M60,6 C85,4 112,26 113,62 C114,98 90,140 58,142 C26,144 3,114 5,78 C7,42 28,8 55,6Z"/></svg>
+          <img class="blob-img" src="milk-fruit-tea-boba-chesterfield.jpg" alt="Milk and fruit tea boba drinks at Sweet Tapioca Cafe Chesterfield" />
+        </div>
+        <span>Milk &amp; Fruit Teas</span>
+      </a>
+
+      <a href="menu.html#coffees" class="cat-item">
+        <div class="blob">
+          <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#2f3192" d="M58,5 C84,3 112,28 113,64 C114,100 88,142 56,143 C24,144 2,112 4,76 C6,40 26,7 53,5Z"/></svg>
+          <img class="blob-img" src="matcha-coffee-hot-drinks-chesterfield.jpg" alt="Matcha coffee and hot drinks at Sweet Tapioca Cafe Chesterfield" />
+        </div>
+        <span>Coffees, Matchas, Hot Drinks</span>
+      </a>
+
+      <a href="menu.html#sodas" class="cat-item">
+        <div class="blob blob-center">
+          <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#25a4dd" d="M57,4 C84,4 113,26 114,65 C115,104 88,143 57,143 C26,143 2,104 3,65 C4,26 30,4 57,4Z"/></svg>
+          <img class="blob-img" src="soda-creme-lemonade-boba.jpg" alt="Sodas cremes and lemonades at Sweet Tapioca Cafe Chesterfield" />
+        </div>
+        <span>Sodas, Cremes &amp; Lemonades</span>
+      </a>
+
+      <a href="menu.html#smoothies" class="cat-item">
+        <div class="blob">
+          <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#2f3192" d="M62,6 C88,4 113,30 114,66 C115,102 88,142 60,143 C32,144 3,116 5,78 C7,40 30,8 57,6Z"/></svg>
+          <img class="blob-img" src="smoothie-slush-boba-chesterfield.jpg" alt="Smoothies and slushes at Sweet Tapioca Cafe Chesterfield" />
+        </div>
+        <span>Smoothies &amp; Slushes</span>
+      </a>
+
+      <a href="menu.html#desserts" class="cat-item">
+        <div class="blob">
+          <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#0e2558" d="M59,6 C85,4 112,28 113,64 C114,100 90,140 58,142 C26,144 4,112 6,76 C8,40 28,8 55,6Z"/></svg>
+          <img class="blob-img" src="bingsu-macarons-desserts-chesterfield.jpg" alt="Bingsu macarons and desserts at Sweet Tapioca Cafe Chesterfield" />
+        </div>
+        <span>Desserts &amp; Snacks</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Photo below flavors in left column -->
+  <div class="main-photo">
+    <img src="boba-catering-chesterfield-mo.jpg" alt="Inside Sweet Tapioca Cafe — Chesterfield's boba tea and dessert cafe" />
+  </div>
+
+  </div><!-- end left-col -->
+
+  <!-- RIGHT: Announcements -->
+  <div class="ann-card">
+    <p class="ann-card-label">What's New</p>
+    <h3>Announcements</h3>
+
+    <p class="ann-hours-label" style="margin-bottom:0.5rem;">🍀 St. Seasonals — Feb 20<sup>th</sup> – Mar 20<sup>th</sup></p>
+    <ul class="ann-list" style="margin-bottom:0.75rem;">
+      <li>Irish Fog (Milk Tea)</li>
+      <li>Shamrock Sunset (Matcha)</li>
+      <li>Gooey Butter Cake Milk Tea</li>
+      <li>Gooey Butter Cake Matcha</li>
+      <li>Gooey Butter Cake Coffee</li>
+      <li>Gooey Butter Cake Creme</li>
+    </ul>
+
+    <div class="ann-divider"></div>
+
+    <p class="ann-hours-label" style="margin-bottom:0.5rem;">🎵 Upcoming Event</p>
+    <ul class="ann-list" style="margin-bottom:0.75rem;">
+      <li><strong>BTS Listening Party</strong> — March 20th, 3–7pm. Celebrate the ARIRANG album with your squad over boba. Featuring &amp; @seoulmusic_stl &amp; @seoulf_creations.24. Limited BTS keychains available for $0.07 with your order!</li>
+    </ul>
+
+    <div class="ann-divider"></div>
+    <p class="ann-hours-label">Hours</p>
+    <div class="ann-hours">
+      <p>
+        Mon: Closed<br>
+        Tue – Fri: noon – 8:30pm<br>
+        Sat: 10am – 9pm<br>
+        Sun: 10am – 6pm
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- VIBES PERKS STRIP -->
+<div class="perks-strip">
+  <div class="perks-inner">
+    <div class="perk">🎵 <span>Vibey music always playing</span></div>
+    <div class="perk-divider"></div>
+    <div class="perk">🎲 <span>Board games &amp; puzzles</span></div>
+    <div class="perk-divider"></div>
+    <div class="perk">🅿️ <span>Free parking out front</span></div>
+    <div class="perk-divider"></div>
+    <div class="perk">🦋 <span>Locally owned &amp; operated</span></div>
+  </div>
+</div>
+
+<!-- THREE CARDS evenly below photo -->
+<div class="cards-section-wrap">
+  <div class="cards-section-header">
+    <p class="eyebrow">What we're about</p>
+    <h2>Come for the boba. Stay for everything else.</h2>
+  </div>
+
+  <div class="three-cards">
+
+    <!-- Card 1: Menu -->
+    <div class="card featured">
+      <div class="card-icon">🧋</div>
+      <h3>Explore the Full Menu</h3>
+      <p>50+ handcrafted drinks, Korean bingsu, artisan macarons, smoothies, cold coffees and matchas — all made fresh daily with premium ingredients.</p>
+      <a href="menu.html" class="card-btn card-btn-dark">View Full Menu →</a>
+    </div>
+
+    <!-- Card 2: Follow & Connect -->
+    <div class="card">
+      <div class="card-icon">📲</div>
+      <h3>Follow &amp; Connect</h3>
+      <p>Stay up to date on new flavors, seasonal menus, events and what's happening at the cafe. Slide into our DMs anytime — we love hearing from you.</p>
+      <div style="display:flex;flex-direction:column;gap:0.6rem;width:100%;">
+        <a href="https://www.instagram.com/sweettapiocacafe/" target="_blank" rel="noopener" class="card-btn card-btn-outline">Instagram →</a>
+        <a href="https://www.facebook.com/SweetTapiocaCafe/" target="_blank" rel="noopener" class="card-btn card-btn-outline">Facebook →</a>
+        <a href="https://www.tiktok.com/@sweet.tapioca.cafe" target="_blank" rel="noopener" class="card-btn card-btn-outline">TikTok →</a>
+        <a href="mailto:sweettapiocacafe.desserts@gmail.com" class="card-btn card-btn-outline">Email Us →</a>
+      </div>
+    </div>
+
+    <!-- Card 3: Catering -->
+    <div class="card">
+      <div class="card-icon">🎉</div>
+      <h3>Catering &amp; Events</h3>
+      <p>Whether you want a live bobarista at your event or just a pick-up order for the party — we've got you. Flexible options tailored to your needs and budget.</p>
+      <a href="mailto:sweettapioca.desserts@gmail.com" class="card-btn card-btn-outline">Email Us to Get Started →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews-section">
+  <div class="reviews-inner">
+    <p class="reviews-eyebrow">⭐⭐⭐⭐⭐ &nbsp; What people are saying</p>
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"STOP SEARCHING! You have found your new favorite boba spot. Such a charming atmosphere and top notch service. They show pride in their boba combinations and flavor profiles."</p>
+        <p class="review-author">— Google Review</p>
+      </div>
+
+      <div class="review-card review-card-featured">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"There are a wide variety of ingredients, can accommodate to different dietary needs (dairy free, gluten free, etc). Do not pass this place up!"</p>
+        <p class="review-author">— Google Review</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"My friends and I always come here after an exam and I'm pretty sure the owner knows our class schedule by now. They've always been so nice and patient with us."</p>
+        <p class="review-author">— Yelp Review</p>
+      </div>
+
+    </div>
+    <a href="https://www.google.com/maps/search/Sweet+Tapioca+Cafe+Chesterfield+MO" target="_blank" rel="noopener" class="reviews-cta">Read more reviews on Google →</a>
+  </div>
+</div>
+
+<!-- VISIT US -->
+<div class="visit-section">
+  <div class="visit-inner">
+
+    <div class="visit-text">
+      <p class="visit-eyebrow">Find us</p>
+      <h2>Come visit us in Chesterfield</h2>
+      <p>We're tucked inside Hilltown Village Center — free parking right out front. No reservations needed, just walk in and order from our kiosk.</p>
+      <div class="visit-details">
+        <div class="visit-detail">
+          <span class="visit-detail-label">Address</span>
+          <span>123 Hilltown Village Center<br>Chesterfield, MO 63017</span>
+        </div>
+        <div class="visit-detail">
+          <span class="visit-detail-label">Hours</span>
+          <span>Mon: Closed<br>Tue–Fri: noon – 8:30pm<br>Sat: 10am – 9pm<br>Sun: 10am – 6pm</span>
+        </div>
+        <div class="visit-detail">
+          <span class="visit-detail-label">Phone</span>
+          <span><a href="tel:+16367781212">(636) 778-1212</a></span>
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=123+Hilltown+Village+Center+Chesterfield+MO+63017" target="_blank" rel="noopener" class="card-btn card-btn-dark" style="display:inline-block;margin-top:1.5rem;">Get Directions →</a>
+    </div>
+
+    <div class="visit-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3115.545814052345!2d-90.5551242239608!3d38.6593224607163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87df2b015a018477%3A0x4f0ecfdc5396ddb4!2sSweet%20Tapioca%20Cafe!5e0!3m2!1sen!2sus!4v1772396453753!5m2!1sen!2sus"
+        width="100%"
+        height="100%"
+        style="border:0;border-radius:8px;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Sweet Tapioca Cafe — 123 Hilltown Village Center, Chesterfield MO 63017">
+      </iframe>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Visit Us</h4>
+      <address>
+        123 Hilltown Village Center<br>
+        Chesterfield, MO 63017<br><br>
+        <small style="opacity:.45;font-size:.7rem;font-style:normal;">Serving Chesterfield, Wildwood,<br>Ballwin &amp; West St. Louis County</small>
+      </address>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Mon: Closed<br>Tue–Fri: noon – 8:30pm<br>Sat: 10am – 9pm<br>Sun: 10am – 6pm</p>
+    </div>
+    <div>
+      <h4>Get in Touch</h4>
+      <p>
+        <a href="tel:+16367781212">(636) 778-1212</a><br>
+        <a href="mailto:sweettapiocacafe.desserts@gmail.com">sweettapiocacafe.desserts@gmail.com</a>
+      </p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/SweetTapiocaCafe/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.instagram.com/sweettapiocacafe/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        <a href="https://www.tiktok.com/@sweet.tapioca.cafe" target="_blank" rel="noopener" aria-label="TikTok">tt</a>
+      </div>
+    </div>
+  </div>
+  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO</p>
+</footer>
+
+</body>
+</html>

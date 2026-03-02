@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu — Sweet Tapioca Cafe | Boba Tea, Bingsu & Macarons in Chesterfield, MO</title>
+  <meta name="description" content="Explore the full Sweet Tapioca Cafe menu — handcrafted milk teas, fruit teas, matchas, cold coffees, Korean bingsu, artisan macarons, smoothies, and more. Chesterfield, MO."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f2f0ed;
+      color: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── BANNER ─── */
+    .top-banner {
+      background: #25a4dd;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+    .top-banner a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      background: #f2f0ed;
+      border-bottom: 1px solid rgba(14,37,88,0.1);
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .nav-logo { display: flex; align-items: center; flex-shrink: 0; margin-right: 2rem; }
+    .nav-links { display: flex; align-items: center; flex-wrap: wrap; }
+    .nav-links a {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #0e2558;
+      opacity: 0.65;
+      padding: 0.45rem 0.9rem;
+      border-right: 1px solid rgba(14,37,88,0.18);
+      white-space: nowrap;
+      transition: opacity 0.18s ease;
+    }
+    .nav-links a:first-child { border-left: 1px solid rgba(14,37,88,0.18); }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+    /* ─── HERO BAND ─── */
+    .hero-band {
+      background: #0e2558;
+      padding: 2.25rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .hero-band-text { max-width: 640px; }
+    .hero-band-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.55rem;
+    }
+    .hero-band h1 {
+      font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+      font-weight: 800;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .hero-band p { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.7; }
+    .hero-band-cta a {
+      display: inline-block;
+      background: #fff;
+      color: #0e2558;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.85rem 1.75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: background 0.18s, color 0.18s;
+    }
+    .hero-band-cta a:hover { background: #25a4dd; color: #fff; }
+
+    /* ─── MENU TABS ─── */
+    .menu-tabs-wrap {
+      background: #fff;
+      border-bottom: 1px solid rgba(14,37,88,0.08);
+      box-shadow: 0 2px 8px rgba(14,37,88,0.06);
+      position: sticky;
+      top: 86px;
+      z-index: 100;
+    }
+    .menu-tabs {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .menu-tabs::-webkit-scrollbar { display: none; }
+    .menu-tab {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(14,37,88,0.5);
+      padding: 1rem 1.25rem;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.18s;
+    }
+    .menu-tab:hover { color: #0e2558; border-bottom-color: rgba(14,37,88,0.2); }
+    .menu-tab.active { color: #0e2558; border-bottom-color: #25a4dd; }
+
+    /* ─── MAIN CONTENT ─── */
+    .menu-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    /* ─── SECTION ─── */
+    .menu-section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 150px;
+    }
+    .menu-section:last-child { margin-bottom: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.5rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #e8e4df;
+    }
+    .section-header-text { flex: 1; }
+    .section-eyebrow {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(14,37,88,0.4);
+      margin-bottom: 0.35rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      font-weight: 800;
+      color: #0e2558;
+      line-height: 1.15;
+    }
+    .section-header p {
+      font-size: 0.78rem;
+      color: #526288;
+      line-height: 1.6;
+      margin-top: 0.4rem;
+    }
+    .section-blob {
+      width: 72px;
+      height: 86px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .section-blob svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .section-blob img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+      z-index: 1;
+    }
+
+    /* ─── SUB-SECTION LABEL ─── */
+    .sub-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(14,37,88,0.4);
+      margin: 1.75rem 0 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e8e4df;
+    }
+
+    /* ─── ITEM GRIDS ─── */
+    .items-grid   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .items-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .items-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+    /* ─── MENU ITEM CARD ─── */
+    .menu-item {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.1rem 1.35rem;
+      border: 1.5px solid #e8e4df;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .menu-item:hover {
+      border-color: rgba(14,37,88,0.25);
+      box-shadow: 0 3px 14px rgba(14,37,88,0.07);
+    }
+    .menu-item.featured { border-color: #0e2558; }
+    .item-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0e2558;
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .item-desc {
+      font-size: 0.72rem;
+      color: #526288;
+      line-height: 1.6;
+      margin-bottom: 0.55rem;
+    }
+    .item-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .item-tag {
+      font-size: 0.56rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      background: #f2f0ed;
+      color: rgba(14,37,88,0.5);
+    }
+    .item-tag.tag-popular  { background: #fff3e0; color: #b85c00; }
+    .item-tag.tag-leaving  { background: #fdecea; color: #c0392b; }
+    .item-tag.tag-df       { background: #e8f7ff; color: #0e86c0; }
+    .item-tag.tag-gf       { background: #f0edff; color: #4a2d99; }
+    .item-tag.tag-cf       { background: #f0f8f0; color: #2a6e1a; }
+
+    /* ─── CUSTOMIZATION CALLOUT ─── */
+    .customize-banner {
+      background: #0e2558;
+      border-radius: 8px;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .customize-banner p { font-size: 0.75rem; color: rgba(255,255,255,0.85); line-height: 1.6; }
+    .customize-banner strong { color: #fff; }
+    .customize-icon { font-size: 1.35rem; flex-shrink: 0; }
+
+    /* ─── DIVIDER ─── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e8e4df 20%, #e8e4df 80%, transparent);
+      margin: 3rem 0;
+    }
+
+    /* ─── ORDER CTA STRIP ─── */
+    .order-strip {
+      background: #25a4dd;
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .order-strip h2 { font-size: clamp(1rem, 2vw, 1.35rem); font-weight: 800; color: #fff; }
+    .order-strip p { font-size: 0.78rem; color: rgba(255,255,255,0.85); margin-top: 0.3rem; }
+    .order-strip a {
+      display: inline-block;
+      background: #fff;
+      color: #0e2558;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.85rem 1.75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.18s, color 0.18s;
+    }
+    .order-strip a:hover { background: #0e2558; color: #fff; }
+
+    /* ─── FOOTER ─── */
+    footer { background: #0e2558; color: rgba(255,255,255,0.55); padding: 2.5rem 2.5rem 1.75rem; }
+    .footer-inner {
+      max-width: 1100px;
+      padding: 0 0 2rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    footer h4 { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #25a4dd; margin-bottom: 0.85rem; }
+    footer p, footer address { font-style: normal; font-size: 0.78rem; line-height: 1.9; }
+    footer a { color: rgba(255,255,255,0.55); transition: color 0.18s; }
+    footer a:hover { color: #25a4dd; }
+    .footer-social { display: flex; gap: 0.6rem; margin-top: 0.75rem; }
+    .footer-social a {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.58rem; font-weight: 800; color: rgba(255,255,255,0.5);
+      transition: all 0.18s;
+    }
+    .footer-social a:hover { background: #25a4dd; border-color: #25a4dd; color: #fff; }
+    .footer-bottom { max-width: 1100px; padding: 0; margin: 1.5rem auto 0; font-size: 0.68rem; text-align: center; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 820px) {
+      body { overflow-x: hidden; }
+      .top-banner { font-size: 0.65rem; padding: 0.6rem 1rem; }
+      nav { padding: 0.75rem 1rem; }
+      .nav-links a { font-size: 0.55rem; padding: 0.45rem 0.6rem; }
+      .hero-band { flex-direction: column; padding: 1.75rem 1.25rem; gap: 1.25rem; }
+      .hero-band-cta a { width: 100%; text-align: center; display: block; }
+      .menu-tabs-wrap { top: 72px; box-shadow: 0 2px 8px rgba(14,37,88,0.06); }
+      .menu-tabs { padding: 0 1rem; }
+      .menu-tab { padding: 0.85rem 0.85rem; font-size: 0.6rem; }
+      .menu-content { padding: 2rem 1rem 3rem; }
+      .menu-section { scroll-margin-top: 120px; }
+      .items-grid   { grid-template-columns: 1fr 1fr; }
+      .items-grid-2 { grid-template-columns: 1fr; }
+      .items-grid-4 { grid-template-columns: 1fr 1fr; }
+      .section-blob { display: none; }
+      .order-strip { flex-direction: column; padding: 2rem 1.25rem; text-align: center; }
+      .order-strip a { width: 100%; text-align: center; }
+      .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      footer { padding: 2.5rem 1.25rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .items-grid   { grid-template-columns: 1fr; }
+      .items-grid-4 { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 821px) and (max-width: 1050px) {
+      .items-grid   { grid-template-columns: repeat(2, 1fr); }
+      .items-grid-4 { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="top-banner">
+  Now serving Chesterfield, Wildwood, Ballwin &amp; West St. Louis County &nbsp;·&nbsp; Call us to book your event: <a href="tel:+16367781212">(636) 778-1212</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="Sweet Tapioca Logo.png" alt="Sweet Tapioca Cafe" style="height:85px;width:auto;display:block;" />
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="menu.html" class="active">Menu</a>
+    <a href="events.html">Events &amp; Catering</a>
+    
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-band">
+  <div class="hero-band-text">
+    <p class="hero-band-label">Full Menu &nbsp;·&nbsp; Handcrafted Daily &nbsp;·&nbsp; Hilltown Village Center</p>
+    <h1>50+ drinks, Korean bingsu, artisan macarons — all made fresh.</h1>
+    <p>Everything is handcrafted to order. Dairy-free and gluten-free options available across the menu.</p>
+  </div>
+  <div class="hero-band-cta">
+    <a href="https://www.clover.com/online-ordering/sweet-tapioca-cafe-chesterfield" target="_blank" rel="noopener">Order for Pick Up →</a>
+  </div>
+</div>
+
+<!-- STICKY TABS -->
+<div class="menu-tabs-wrap">
+  <div class="menu-tabs">
+    <a href="#milk-fruit" class="menu-tab active">Milk &amp; Fruit Teas</a>
+    <a href="#coffees" class="menu-tab">Coffees, Matchas &amp; Hot</a>
+    <a href="#sodas" class="menu-tab">Sodas, Cremes &amp; Lemonades</a>
+    <a href="#smoothies" class="menu-tab">Smoothies &amp; Slushes</a>
+    <a href="#desserts" class="menu-tab">Desserts &amp; Snacks</a>
+  </div>
+</div>
+
+<!-- MENU CONTENT -->
+<div class="menu-content">
+
+  <!-- ══ 01: MILK & FRUIT TEAS ══ -->
+  <section class="menu-section" id="milk-fruit">
+    <div class="section-header">
+      <div class="section-header-text">
+        <h2>Milk &amp; Fruit Teas</h2>
+        <p>Our signature boba drinks — creamy milk teas and refreshing fruit teas, topped with your choice of pearls, popping boba, or jelly.</p>
+      </div>
+      <div class="section-blob">
+        <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#0e2558" d="M60,6 C85,4 112,26 113,62 C114,98 90,140 58,142 C26,144 3,114 5,78 C7,42 28,8 55,6Z"/></svg>
+        <img src="milk-fruit-tea-boba-chesterfield.jpg" alt="Milk and fruit teas" />
+      </div>
+    </div>
+
+    <p class="sub-label">Milk Teas</p>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-name">Classic Milk Tea</div>
+        <div class="item-desc">Choice of Jasmine Green, Black, or Oolong tea base with creamy milk.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Sakura Rose</div>
+        <div class="item-desc">Delicate floral sakura and rose with a smooth milk tea base.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Strawberry</div>
+        <div class="item-desc">Sweet strawberry milk tea — a crowd-pleasing classic.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Honeydew</div>
+        <div class="item-desc">Light and melon-sweet honeydew milk tea.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Ube Royal</div>
+        <div class="item-desc">Filipino purple yam milk tea with a naturally sweet, vanilla-like flavor.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Hokkaido</div>
+        <div class="item-desc">Rich and creamy Japanese-inspired milk tea with a caramel finish.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Horchata</div>
+        <div class="item-desc">Cinnamon-spiced rice milk tea inspired by the Mexican classic.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Coconut</div>
+        <div class="item-desc">Tropical coconut milk tea — creamy and refreshing.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free Option</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Mango</div>
+        <div class="item-desc">Bright mango flavor paired with a creamy milk tea base.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Thai</div>
+        <div class="item-desc">Bold Thai-style tea with condensed milk and a spiced finish.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Taro</div>
+        <div class="item-desc">Velvety taro with a naturally sweet and nutty milk tea base.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Oreo</div>
+        <div class="item-desc">Cookies and cream meets milk tea — rich, indulgent, and fun.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Tiramisu</div>
+        <div class="item-desc">Espresso-forward milk tea with a creamy tiramisu-inspired finish.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Okinawa</div>
+        <div class="item-desc">Japanese brown sugar roasted tea with a deep, caramelized sweetness.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Caramel Biscoff</div>
+        <div class="item-desc">Warm Biscoff cookie butter flavor in a creamy milk tea.</div>
+      </div>
+    </div>
+
+    <p class="sub-label">Fruit Teas</p>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-name">Grapefruit Strawberry Lime</div>
+        <div class="item-desc">Bright citrus and strawberry over a light tea base.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Dragon Fruit Lemonade</div>
+        <div class="item-desc">Vibrant dragon fruit with a tart lemonade base.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Raspberry Strawberry</div>
+        <div class="item-desc">A duo of fresh berries in a light, refreshing tea.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Lychee Passion Fruit</div>
+        <div class="item-desc">Floral lychee meets tropical passion fruit over green tea.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Pineapple Mango</div>
+        <div class="item-desc">Tropical pineapple and mango — sunshine in a cup.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Peachy Lychee</div>
+        <div class="item-desc">Sweet peach and delicate lychee over jasmine tea.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Sweet Tapioca</div>
+        <div class="item-desc">Our house fruit tea — a signature blend unique to the cafe.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Lychee Rose</div>
+        <div class="item-desc">Fragrant rose and lychee over a light floral tea base.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Peachy Rose</div>
+        <div class="item-desc">Soft peach and rose in a delicate, aromatic tea.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+    </div>
+
+    <div class="customize-banner">
+      <div class="customize-icon">🧋</div>
+      <div>
+        <p style="margin-bottom:0.55rem;"><strong>Make it yours.</strong> Choose your sweetness (0–100%), ice level, and topping:</p>
+        <p style="margin-bottom:0.3rem; font-size:0.72rem; color:rgba(255,255,255,0.85);"><strong style="color:#fff;">Popping Boba —</strong> Lychee · Mango · Peach · Pomegranate · Strawberry</p>
+        <p style="margin-bottom:0.3rem; font-size:0.72rem; color:rgba(255,255,255,0.85);"><strong style="color:#fff;">Crystal Boba —</strong> Cherry Blossom · Lychee</p>
+        <p style="margin-bottom:0.3rem; font-size:0.72rem; color:rgba(255,255,255,0.85);"><strong style="color:#fff;">Jelly —</strong> Lychee · Mango Star · Rainbow</p>
+        <p style="font-size:0.72rem; color:rgba(255,255,255,0.85);"><strong style="color:#fff;">Also available —</strong> Tapioca Pearls · Red Bean</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ 02: COFFEES, MATCHAS & HOT DRINKS ══ -->
+  <section class="menu-section" id="coffees">
+    <div class="section-header">
+      <div class="section-header-text">
+        <h2>Coffees, Matchas &amp; Hot Drinks</h2>
+        <p>Cold coffees, ceremonial-grade matchas, and warm drinks — all crafted with premium ingredients.</p>
+      </div>
+      <div class="section-blob">
+        <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#2f3192" d="M58,5 C84,3 112,28 113,64 C114,100 88,142 56,143 C24,144 2,112 4,76 C6,40 26,7 53,5Z"/></svg>
+        <img src="matcha-coffee-hot-drinks-chesterfield.jpg" alt="Coffees and matchas" />
+      </div>
+    </div>
+
+    <p class="sub-label">Cold Coffee</p>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-name">Creme Brulee Coffee</div>
+        <div class="item-desc">Rich cold coffee with a caramelized creme brulee flavor and creamy finish.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Coffee Milk Tea</div>
+        <div class="item-desc">Bold coffee blended into a creamy milk tea base — the best of both worlds.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Coconut Coffee</div>
+        <div class="item-desc">Smooth cold coffee with a tropical coconut twist.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Pandan Coffee</div>
+        <div class="item-desc">Earthy pandan with cold coffee — a Southeast Asian-inspired original.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Ube Coffee</div>
+        <div class="item-desc">Filipino purple yam meets bold cold coffee. Stunning and delicious.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Viet Coffee</div>
+        <div class="item-desc">Strong Vietnamese-style iced coffee with condensed milk.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+    </div>
+
+    <p class="sub-label">Cold Matcha</p>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-name">Classic Matcha</div>
+        <div class="item-desc">Ceremonial-grade matcha whisked with milk over ice. Pure and clean.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Dragon Fruit</div>
+        <div class="item-desc">Vibrant dragon fruit layered over a ceremonial matcha base.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Strawberry</div>
+        <div class="item-desc">Sweet strawberry and earthy matcha — a popular color-layered drink.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Red Bean</div>
+        <div class="item-desc">Classic Japanese pairing of ceremonial matcha with sweet red bean.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Tiramisu</div>
+        <div class="item-desc">Espresso-inspired tiramisu flavors layered with smooth matcha.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Mango</div>
+        <div class="item-desc">Tropical mango over a creamy matcha base — bright and refreshing.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Ube Oasis</div>
+        <div class="item-desc">Purple ube swirled into smooth matcha — a stunning layered creation.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+    </div>
+
+    <p class="sub-label">Hot Drinks</p>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-name">Cinnamon Spice Tea Latte</div>
+        <div class="item-desc">Warm spiced tea latte with a cinnamon-forward flavor and steamed milk.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Coconut Vanilla Tea Latte</div>
+        <div class="item-desc">Creamy coconut and vanilla in a comforting hot tea latte.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Hot Chocolate</div>
+        <div class="item-desc">Rich and creamy hot chocolate — a classic done right.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Hot Coffee</div>
+        <div class="item-desc">Simple, quality hot coffee served fresh.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Masala Chai</div>
+        <div class="item-desc">Warming spiced chai with ginger, cardamom, and steamed milk.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Chocolate Hazelnut Coffee Latte</div>
+        <div class="item-desc">Hot coffee with chocolate hazelnut — indulgent and aromatic.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Hot Matcha Latte</div>
+        <div class="item-desc">Ceremonial-grade matcha whisked with steamed milk. Calm in a cup.</div>
+      </div>
+    </div>
+
+    <div class="customize-banner">
+      <div class="customize-icon">☕</div>
+      <p><strong>St. Patrick's seasonals available now through March 20th:</strong> Gooey Butter Cake Milk Tea, Gooey Butter Cake Matcha, and Gooey Butter Cake Coffee. Ask your barista!</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ 03: SODAS, CREMES & LEMONADES ══ -->
+  <section class="menu-section" id="sodas">
+    <div class="section-header">
+      <div class="section-header-text">
+        <h2>Sodas, Cremes &amp; Lemonades</h2>
+        <p>Light, fizzy, and fruity — our sparkling sodas, cremes, and lemonades for a refreshing pick-me-up.</p>
+      </div>
+      <div class="section-blob">
+        <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#25a4dd" d="M57,4 C84,4 113,26 114,65 C115,104 88,143 57,143 C26,143 2,104 3,65 C4,26 30,4 57,4Z"/></svg>
+        <img src="soda-creme-lemonade-boba.jpg" alt="Sodas and lemonades" />
+      </div>
+    </div>
+
+    <p class="sub-label">Sparkling Sodas</p>
+    <div class="items-grid-4">
+      <div class="menu-item">
+        <div class="item-name">Paradise</div>
+        <div class="item-desc">A tropical sparkling blend — bright and refreshing.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Sweet Sunrise</div>
+        <div class="item-desc">A fruity, layered soda inspired by the colors of sunrise.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Tropical Delight</div>
+        <div class="item-desc">Tropical flavors over sparkling water — fun and fizzy.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Pixie</div>
+        <div class="item-desc">A playful, candy-inspired sparkling soda.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+    </div>
+
+    <p class="sub-label">Cremes</p>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-name">Brown Sugar with Crème Brûlée Foam</div>
+        <div class="item-desc">Rich brown sugar drink topped with a silky crème brûlée foam — decadent and smooth.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Strawberry &amp; Creme</div>
+        <div class="item-desc">Fresh strawberry with a velvety cream layer — sweet and indulgent.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Mango &amp; Creme</div>
+        <div class="item-desc">Tropical mango topped with a smooth cream layer. Bright and creamy.</div>
+        <div class="item-tags"><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+    </div>
+
+    <p class="sub-label">Lemonades</p>
+    <div class="items-grid-2">
+      <div class="menu-item">
+        <div class="item-name">Lavender Lemonade</div>
+        <div class="item-desc">Floral lavender with bright fresh-squeezed lemon. Elegant and refreshing.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Strawberry Lemonade</div>
+        <div class="item-desc">Classic strawberry lemonade with a fresh citrus bite.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span><span class="item-tag tag-df">Dairy-Free</span><span class="item-tag tag-cf">Caffeine-Free</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ 04: SMOOTHIES & SLUSHES ══ -->
+  <section class="menu-section" id="smoothies">
+    <div class="section-header">
+      <div class="section-header-text">
+        <h2>Smoothies &amp; Slushes</h2>
+        <p>Thick blended smoothies and icy slushes — packed with real fruit and made fresh to order.</p>
+      </div>
+      <div class="section-blob">
+        <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#2f3192" d="M62,6 C88,4 113,30 114,66 C115,102 88,142 60,143 C32,144 3,116 5,78 C7,40 30,8 57,6Z"/></svg>
+        <img src="smoothie-slush-boba-chesterfield.jpg" alt="Smoothies and slushes" />
+      </div>
+    </div>
+
+    <p class="sub-label">Smoothies</p>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-name">Strawberry</div>
+        <div class="item-desc">Classic fresh strawberry smoothie — simple, sweet, and satisfying.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Chocolate</div>
+        <div class="item-desc">Rich, creamy chocolate smoothie — indulgent and thick.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Avocado</div>
+        <div class="item-desc">Creamy avocado blended smooth with condensed milk — a Vietnamese classic.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Matcha</div>
+        <div class="item-desc">Ceremonial matcha blended into a thick and earthy smoothie.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Mango</div>
+        <div class="item-desc">Fresh mango blended into a thick tropical smoothie.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Mangonada</div>
+        <div class="item-desc">Mango smoothie with chamoy, chili lime, and tamarind candy — bold and fun.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Dragon Fruit</div>
+        <div class="item-desc">Vibrant pink dragon fruit blended into a striking, refreshing smoothie.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Strawberry Lava</div>
+        <div class="item-desc">Strawberry smoothie with a flowing lava-inspired topping.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Strawberry Cheesecake</div>
+        <div class="item-desc">Creamy cheesecake flavor blended with fresh strawberry. Dessert in a cup.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Pineapple Toasted Coconut</div>
+        <div class="item-desc">Tropical pineapple with a toasted coconut finish.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Dubai Chocolate</div>
+        <div class="item-desc">Inspired by the viral Dubai chocolate — rich, nutty, and indulgent.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+    </div>
+
+    <p class="sub-label">Slushes</p>
+    <div class="items-grid-4">
+      <div class="menu-item">
+        <div class="item-name">Taro</div>
+        <div class="item-desc">Finely blended taro icy slush — sweet, creamy, and beautifully purple.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Honeydew</div>
+        <div class="item-desc">Light melon slush — refreshing and not too sweet.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Coconut</div>
+        <div class="item-desc">Creamy coconut icy slush — tropical and refreshing.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Mango</div>
+        <div class="item-desc">Fresh mango blended into a bright and icy tropical slush.</div>
+        <div class="item-tags"><span class="item-tag tag-df">Dairy-Free</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ 05: DESSERTS & SNACKS ══ -->
+  <section class="menu-section" id="desserts">
+    <div class="section-header">
+      <div class="section-header-text">
+        <h2>Desserts &amp; Snacks</h2>
+        <p>Korean bingsu, artisan macarons, and savory snacks — the reason people stay a little longer.</p>
+      </div>
+      <div class="section-blob">
+        <svg viewBox="0 0 115 145" xmlns="http://www.w3.org/2000/svg"><path fill="#0e2558" d="M59,6 C85,4 112,28 113,64 C114,100 90,140 58,142 C26,144 4,112 6,76 C8,40 28,8 55,6Z"/></svg>
+        <img src="bingsu-macarons-desserts-chesterfield.jpg" alt="Bingsu and desserts" />
+      </div>
+    </div>
+
+    <p class="sub-label">Korean Bingsu — Shaved Ice</p>
+    <div class="items-grid-2">
+      <div class="menu-item featured">
+        <div class="item-name">Twister (Strawberry &amp; Mango)</div>
+        <div class="item-desc">Shaved milk ice with a twist of fresh strawberry and mango — bright, fruity, and refreshing.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Strawberry Surprise</div>
+        <div class="item-desc">Finely shaved milk ice topped with fresh strawberries and a sweet strawberry finish.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Mango Madness</div>
+        <div class="item-desc">Tropical shaved milk ice with fresh mango chunks and mango syrup.</div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Caramel Biscoff</div>
+        <div class="item-desc">Shaved milk ice with Biscoff cookie butter and a caramel drizzle — deeply indulgent.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Milk &amp; Cookie</div>
+        <div class="item-desc">Shaved milk ice with cookie crumbles and sweet cream — pure comfort.</div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Injeolmi</div>
+        <div class="item-desc">Traditional Korean bingsu with roasted soybean powder and chewy rice cake mochi.</div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Tarolicious</div>
+        <div class="item-desc">Taro shaved milk ice with purple taro pearls and condensed milk.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Matcha Redbean</div>
+        <div class="item-desc">Classic Japanese pairing — ceremonial matcha shaved ice with sweet red bean.</div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Strawberry Matcha</div>
+        <div class="item-desc">Fresh strawberry layered over a matcha shaved ice base — elegant and delicious.</div>
+      </div>
+      <div class="menu-item featured">
+        <div class="item-name">Dubai Chocolate</div>
+        <div class="item-desc">Inspired by the viral Dubai chocolate — rich, nutty, and indulgent on shaved milk ice.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+    </div>
+
+    <div class="customize-banner" style="margin-top:1.25rem;">
+      <div class="customize-icon">🍡</div>
+      <p><strong>Bingsu tip:</strong> Best enjoyed fresh and great to share. Ask about extra toppings at the counter — red bean, mochi, fresh fruit, or condensed milk drizzle.</p>
+    </div>
+
+    <p class="sub-label">Artisan Macarons</p>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-name">Pumpkin Pecan</div>
+        <div class="item-desc">A seasonal favorite — get it before it's gone.</div>
+        <div class="item-tags"><span class="item-tag tag-leaving">Leaving Soon</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Bark-a-ron 🐾</div>
+        <div class="item-desc">A dog-friendly macaron made without chocolate, xylitol, or anything harmful. Because your pup deserves a treat too.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Fan Favorite</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Galaxy</div>
+        <div class="item-desc">A visually stunning macaron with a cosmic swirl and out-of-this-world flavor.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Princess Cake</div>
+        <div class="item-desc">Light and sweet, inspired by the classic Scandinavian princess cake.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Strawberry Shortcake</div>
+        <div class="item-desc">Fresh strawberry with a shortcake cream filling — a dessert classic reimagined.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Red Velvet</div>
+        <div class="item-desc">Classic red velvet flavor with a cream cheese-inspired filling.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">French Raspberry</div>
+        <div class="item-desc">A classic French-style macaron with a bright raspberry ganache filling.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Raspberry Lemonade</div>
+        <div class="item-desc">Tart raspberry and zesty lemon in a refreshing macaron form.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Nutella</div>
+        <div class="item-desc">Chocolate hazelnut filling in a delicate shell — rich and irresistible.</div>
+        <div class="item-tags"><span class="item-tag tag-popular">Popular</span></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Creme Brulee</div>
+        <div class="item-desc">Caramelized sugar and vanilla custard in macaron form. Elegant and indulgent.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Mango &amp; White Chocolate</div>
+        <div class="item-desc">Tropical mango with a smooth white chocolate ganache filling.</div>
+      </div>
+    </div>
+
+    <p class="sub-label">Savory Snacks</p>
+    <div class="items-grid-2">
+      <div class="menu-item">
+        <div class="item-name">International Chips</div>
+        <div class="item-desc">A rotating selection of chips and snacks from around the world.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-name">Boba Chaat</div>
+        <div class="item-desc">A savory Indian-inspired snack with a sweet and tangy twist.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end menu-content -->
+
+<!-- ORDER CTA -->
+<div class="order-strip">
+  <div>
+    <h2>Ready to order?</h2>
+    <p>Pick up is quick and easy — order ahead through our online ordering system.</p>
+  </div>
+  <a href="https://www.clover.com/online-ordering/sweet-tapioca-cafe-chesterfield" target="_blank" rel="noopener">Order for Pick Up →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Visit Us</h4>
+      <address>
+        123 Hilltown Village Center<br>
+        Chesterfield, MO 63017<br><br>
+        <small style="opacity:.45;font-size:.7rem;font-style:normal;">Serving Chesterfield, Wildwood,<br>Ballwin &amp; West St. Louis County</small>
+      </address>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Mon: Closed<br>Tue–Fri: noon – 8:30pm<br>Sat: 10am – 9pm<br>Sun: 10am – 6pm</p>
+    </div>
+    <div>
+      <h4>Get in Touch</h4>
+      <p>
+        <a href="tel:+16367781212">(636) 778-1212</a><br>
+        <a href="mailto:sweettapiocacafe.desserts@gmail.com">sweettapiocacafe.desserts@gmail.com</a>
+      </p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/SweetTapiocaCafe/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.instagram.com/sweettapiocacafe/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        <a href="https://www.tiktok.com/@sweet.tapioca.cafe" target="_blank" rel="noopener" aria-label="TikTok">tt</a>
+      </div>
+    </div>
+  </div>
+  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO</p>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.menu-section');
+  const tabs = document.querySelectorAll('.menu-tab');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tabs.forEach(t => t.classList.remove('active'));
+        const activeTab = document.querySelector(`.menu-tab[href="#${entry.target.id}"]`);
+        if (activeTab) activeTab.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+<!-- SCROLL TO TOP -->
+<a href="#" id="scroll-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<style>
+  #scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 42px;
+    height: 42px;
+    background: #0e2558;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 3px 12px rgba(14,37,88,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, background 0.18s;
+    z-index: 500;
+    text-decoration: none;
+  }
+  #scroll-top.visible { opacity: 1; pointer-events: auto; }
+  #scroll-top:hover { background: #25a4dd; }
+</style>
+
+<script>
+  const btn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+</script>
+
+</body>
+</html>
