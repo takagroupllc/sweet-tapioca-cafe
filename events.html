@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Events & Catering — Sweet Tapioca Cafe | Boba Tea Catering in Chesterfield, MO</title>
+  <meta name="description" content="Book Sweet Tapioca Cafe for your next event! Live bobarista service, boba catering for parties, corporate events, and more. Located in Chesterfield, MO. Email sweettapiocacafe.desserts@gmail.com to get started."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "BTS ARIRANG Listening Party at Sweet Tapioca Cafe",
+    "description": "Celebrate the BTS comeback album ARIRANG with a listening party at Sweet Tapioca Cafe. Featuring @seoulmusicstl and @seoulful_creations.24. Limited BTS keychains available.",
+    "startDate": "2026-03-20",
+    "location": {
+      "@type": "Place",
+      "name": "Sweet Tapioca Cafe",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Hilltown Village Center",
+        "addressLocality": "Chesterfield",
+        "addressRegion": "MO",
+        "postalCode": "63017"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Sweet Tapioca Cafe",
+      "url": "https://www.sweettapiocacafe.com"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f2f0ed;
+      color: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── BANNER ─── */
+    .top-banner {
+      background: #25a4dd;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+    .top-banner a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      background: #f2f0ed;
+      border-bottom: 1px solid rgba(14,37,88,0.1);
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .nav-logo { display: flex; align-items: center; flex-shrink: 0; margin-right: 2rem; }
+    .nav-links { display: flex; align-items: center; flex-wrap: wrap; }
+    .nav-links a {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #0e2558;
+      opacity: 0.65;
+      padding: 0.45rem 0.9rem;
+      border-right: 1px solid rgba(14,37,88,0.18);
+      white-space: nowrap;
+      transition: opacity 0.18s ease;
+    }
+    .nav-links a:first-child { border-left: 1px solid rgba(14,37,88,0.18); }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+    /* ─── HERO BAND ─── */
+    .hero-band {
+      background: #0e2558;
+      padding: 2.25rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .hero-band-text { max-width: 640px; }
+    .hero-band-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.55rem;
+    }
+    .hero-band h1 {
+      font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+      font-weight: 800;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .hero-band p { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.7; }
+    .hero-band-cta a {
+      display: inline-block;
+      background: #fff;
+      color: #0e2558;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.85rem 1.75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: background 0.18s, color 0.18s;
+    }
+    .hero-band-cta a:hover { background: #25a4dd; color: #fff; }
+
+    /* ─── PAGE CONTENT ─── */
+    .page-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* ─── SECTION EYEBROW ─── */
+    .eyebrow {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(14,37,88,0.4);
+      margin-bottom: 0.4rem;
+    }
+
+    /* ─── BTS EVENT CARD ─── */
+    .bts-card {
+      background: #0e2558;
+      border-radius: 10px;
+      padding: 2.5rem 2.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .bts-card::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(37,164,221,0.12);
+      pointer-events: none;
+    }
+    .bts-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 30%;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(47,49,146,0.25);
+      pointer-events: none;
+    }
+    .bts-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #25a4dd;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .bts-date {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #25a4dd;
+      margin-bottom: 0.5rem;
+    }
+    .bts-card h2 {
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .bts-card h2 em {
+      font-style: italic;
+      color: #25a4dd;
+    }
+    .bts-body {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2.5rem;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+    .bts-text p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .bts-text p:last-child { margin-bottom: 0; }
+    .bts-text strong { color: #fff; }
+    .bts-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-width: 220px;
+    }
+    .bts-feature {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 0.85rem 1.1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+    .bts-feature-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .bts-feature-text {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+    .bts-feature-text strong { color: #fff; display: block; margin-bottom: 0.1rem; }
+
+    /* ─── KEYCHAIN CALLOUT ─── */
+    .keychain-strip {
+      background: #25a4dd;
+      border-radius: 8px;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .keychain-strip p {
+      font-size: 0.78rem;
+      color: #fff;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .keychain-strip strong { font-weight: 800; }
+    .keychain-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+    /* ─── CATERING SECTION ─── */
+    .catering-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .catering-intro {
+      background: #fff;
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+      border: 1.5px solid #e8e4df;
+    }
+    .catering-intro h2 {
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      font-weight: 800;
+      color: #0e2558;
+      line-height: 1.15;
+      margin-bottom: 0.85rem;
+    }
+    .catering-intro p {
+      font-size: 0.8rem;
+      color: #526288;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .catering-intro p:last-of-type { margin-bottom: 1.5rem; }
+    .catering-email-link {
+      display: inline-block;
+      background: #0e2558;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      transition: background 0.18s;
+    }
+    .catering-email-link:hover { background: #25a4dd; }
+
+    .catering-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .catering-option {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.4rem 1.5rem;
+      border: 1.5px solid #e8e4df;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .catering-option:hover {
+      border-color: rgba(14,37,88,0.25);
+      box-shadow: 0 3px 14px rgba(14,37,88,0.07);
+    }
+    .catering-option.featured { border-color: #0e2558; }
+    .catering-option-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .catering-option-text h3 {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #0e2558;
+      margin-bottom: 0.3rem;
+    }
+    .catering-option-text p {
+      font-size: 0.75rem;
+      color: #526288;
+      line-height: 1.6;
+    }
+
+    /* ─── EMAIL CTA STRIP ─── */
+    .email-strip {
+      background: #25a4dd;
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .email-strip h2 {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .email-strip p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.88);
+      margin-top: 0.3rem;
+    }
+    .email-strip a.btn {
+      display: inline-block;
+      background: #fff;
+      color: #0e2558;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1.75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.18s, color 0.18s;
+    }
+    .email-strip a.btn:hover { background: #0e2558; color: #fff; }
+
+    /* ─── FOOTER ─── */
+    footer { background: #0e2558; color: rgba(255,255,255,0.55); padding: 2.5rem 2.5rem 1.75rem; }
+    .footer-inner {
+      max-width: 1100px;
+      padding: 0 0 2rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    footer h4 { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #25a4dd; margin-bottom: 0.85rem; }
+    footer p, footer address { font-style: normal; font-size: 0.78rem; line-height: 1.9; }
+    footer a { color: rgba(255,255,255,0.55); transition: color 0.18s; }
+    footer a:hover { color: #25a4dd; }
+    .footer-social { display: flex; gap: 0.6rem; margin-top: 0.75rem; }
+    .footer-social a {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.58rem; font-weight: 800; color: rgba(255,255,255,0.5);
+      transition: all 0.18s;
+    }
+    .footer-social a:hover { background: #25a4dd; border-color: #25a4dd; color: #fff; }
+    .footer-bottom { max-width: 1100px; padding: 0; margin: 1.5rem auto 0; font-size: 0.68rem; text-align: center; }
+
+    /* ─── VISIT / MAP ─── */
+    .visit-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      background: #fff;
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+      border: 1.5px solid #e8e4df;
+    }
+    .visit-text h2 {
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      font-weight: 800;
+      color: #0e2558;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .visit-text > p {
+      font-size: 0.8rem;
+      color: #526288;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .visit-details { display: flex; flex-direction: column; gap: 0.9rem; }
+    .visit-detail { display: flex; flex-direction: column; gap: 0.2rem; }
+    .visit-detail-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(14,37,88,0.4);
+    }
+    .visit-detail span:last-child { font-size: 0.8rem; color: #0e2558; line-height: 1.7; }
+    .visit-detail a { color: #25a4dd; }
+    .visit-detail a:hover { text-decoration: underline; }
+    .visit-map {
+      height: 360px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(14,37,88,0.1);
+    }
+
+    /* ─── SCROLL TO TOP ─── */
+    #scroll-top {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 42px; height: 42px;
+      background: #0e2558;
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700;
+      box-shadow: 0 3px 12px rgba(14,37,88,0.25);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease, background 0.18s;
+      z-index: 500;
+    }
+    #scroll-top.visible { opacity: 1; pointer-events: auto; }
+    #scroll-top:hover { background: #25a4dd; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 820px) {
+      body { overflow-x: hidden; }
+      .top-banner { font-size: 0.65rem; padding: 0.6rem 1rem; }
+      nav { padding: 0.75rem 1rem; }
+      .nav-links a { font-size: 0.55rem; padding: 0.45rem 0.6rem; }
+      .hero-band { flex-direction: column; padding: 1.75rem 1.25rem; gap: 1.25rem; }
+      .hero-band-cta a { width: 100%; text-align: center; display: block; }
+      .page-content { padding: 2rem 1rem 3rem; gap: 2rem; }
+      .bts-card { padding: 1.75rem 1.25rem; }
+      .bts-body { grid-template-columns: 1fr; gap: 1.5rem; }
+      .bts-features { min-width: unset; }
+      .catering-section { grid-template-columns: 1fr; }
+      .email-strip { flex-direction: column; padding: 1.75rem 1.25rem; text-align: center; }
+      .email-strip a.btn { width: 100%; text-align: center; }
+      .visit-section { grid-template-columns: 1fr; gap: 1.5rem; }
+      .visit-map { height: 280px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      footer { padding: 2.5rem 1.25rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="top-banner">
+  Now serving Chesterfield, Wildwood, Ballwin &amp; West St. Louis County &nbsp;·&nbsp; Call us to book your event: <a href="tel:+16367781212">(636) 778-1212</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="Sweet Tapioca Logo.png" alt="Sweet Tapioca Cafe" style="height:85px;width:auto;display:block;" />
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="events.html" class="active">Events &amp; Catering</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-band">
+  <div class="hero-band-text">
+    <p class="hero-band-label">Events &amp; Catering &nbsp;·&nbsp; Live Bobarista Service &nbsp;·&nbsp; Chesterfield, MO</p>
+    <h1>Bring Sweet Tapioca to your event — or come celebrate with us.</h1>
+    <p>From listening parties to corporate catering, we make every occasion sweeter.</p>
+  </div>
+  <div class="hero-band-cta">
+    <a href="mailto:sweettapiocacafe.desserts@gmail.com">Get in Touch →</a>
+  </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="page-content">
+
+  <!-- ── BTS EVENT ── -->
+  <div>
+    <p class="eyebrow">Upcoming Event &nbsp;·&nbsp; March 20, 2026</p>
+    <div class="bts-card">
+      <div class="bts-badge">🚨 BTS IS BACK 🚨</div>
+      <p class="bts-date">Thursday, March 20th &nbsp;·&nbsp; 3:00 – 7:00 PM &nbsp;·&nbsp; Sweet Tapioca Cafe &nbsp;·&nbsp; Chesterfield, MO</p>
+      <h2>ARIRANG<br><em>Listening Party</em></h2>
+
+      <div class="bts-body">
+        <div class="bts-text">
+          <p>Their comeback album, <strong>ARIRANG</strong>, comes out March 20th — so what better way to celebrate than to throw a <strong>listening party</strong>?! We'll have the album on repeat so you can listen with your squad while sipping on boba 🧋</p>
+          <p>Also joining us will be <strong>@seoulmusicstl</strong> and <strong>@seoulful_creations.24</strong> so you can get your BTS K-POP fix 😍</p>
+          <p><strong>Celebrate the album RIGHT!</strong> See you there! ♥️</p>
+
+          <div class="keychain-strip">
+            <div class="keychain-icon">🔑</div>
+            <p>Add a <strong>handmade BTS keychain</strong> to your boba order for just <strong>$0.07!</strong> We have a limited number so be sure to claim yours before they run out ♥️</p>
+          </div>
+        </div>
+
+        <div class="bts-features">
+          <div class="bts-feature">
+            <div class="bts-feature-icon">🎵</div>
+            <div class="bts-feature-text">
+              <strong>Album on Repeat</strong>
+              ARIRANG playing all day long
+            </div>
+          </div>
+          <div class="bts-feature">
+            <div class="bts-feature-icon">🧋</div>
+            <div class="bts-feature-text">
+              <strong>Full Boba Menu</strong>
+              All your favorite drinks available
+            </div>
+          </div>
+          <div class="bts-feature">
+            <div class="bts-feature-icon">🎤</div>
+            <div class="bts-feature-text">
+              <strong>@seoulmusicstl</strong>
+            </div>
+          </div>
+          <div class="bts-feature">
+            <div class="bts-feature-icon">✨</div>
+            <div class="bts-feature-text">
+              <strong>@seoulful_creations.24</strong>
+            </div>
+          </div>
+          <div class="bts-feature">
+            <div class="bts-feature-icon">🔑</div>
+            <div class="bts-feature-text">
+              <strong>BTS Keychains — $0.07</strong>
+              Handmade &amp; while supplies last
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CATERING SECTION ── -->
+  <div>
+    <p class="eyebrow">Catering &amp; Services</p>
+    <div class="catering-section">
+
+      <div class="catering-intro">
+        <h2>Catering &amp; Services</h2>
+        <p>Yes! We do catering and events! Whether you're looking to have a <strong>live bobarista at your event</strong> or just want to pick up some drinks for the party, we have your back!</p>
+        <p>We have flexible options so we can tailor the project and cost around your needs and budget.</p>
+        <p>Want to have an event at the shop? We do that too — email us to get started.</p>
+        <a href="mailto:sweettapiocacafe.desserts@gmail.com" class="catering-email-link">Email us to get started →</a>
+      </div>
+
+      <div class="catering-options">
+        <div class="catering-option featured">
+          <div class="catering-option-icon">🧑‍🍳</div>
+          <div class="catering-option-text">
+            <h3>Live Bobarista at Your Event</h3>
+            <p>We bring the full Sweet Tapioca experience to your venue — a live bobarista crafting drinks on the spot for your guests. Perfect for weddings, corporate events, birthday parties, and more.</p>
+          </div>
+        </div>
+        <div class="catering-option">
+          <div class="catering-option-icon">🥡</div>
+          <div class="catering-option-text">
+            <h3>Catering Pick-Up Orders</h3>
+            <p>Ordering for a group or party? We can prepare bulk drinks for pick-up so your guests can sip on boba without the wait.</p>
+          </div>
+        </div>
+        <div class="catering-option">
+          <div class="catering-option-icon">🏠</div>
+          <div class="catering-option-text">
+            <h3>In-Shop Private Events</h3>
+            <p>Want to host your event right here at the cafe? Reach out and we'll work with you to create something special in our Chesterfield location.</p>
+          </div>
+        </div>
+        <div class="catering-option">
+          <div class="catering-option-icon">💬</div>
+          <div class="catering-option-text">
+            <h3>Flexible &amp; Custom Packages</h3>
+            <p>No two events are the same. We tailor everything — menu, quantity, setup, and cost — around your specific needs and budget.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EMAIL CTA ── -->
+  <div class="email-strip">
+    <div>
+      <h2>Ready to book or have a question?</h2>
+      <p>Email us and we'll get back to you to talk through the details.</p>
+      <p style="font-size:0.75rem;color:rgba(255,255,255,0.75);margin-top:0.3rem;">Or stop by the store and let's chat!</p>
+    </div>
+    <a href="mailto:sweettapiocacafe.desserts@gmail.com" class="btn">sweettapiocacafe.desserts@gmail.com</a>
+  </div>
+
+  <!-- ── FIND US ── -->
+  <div>
+    <p class="eyebrow">Find Us</p>
+    <div class="visit-section">
+      <div class="visit-text">
+        <h2>Come visit us in Chesterfield</h2>
+        <p>We're tucked inside Hilltown Village Center — free parking right out front. No reservations needed, just walk in and order from our kiosk.</p>
+        <div class="visit-details">
+          <div class="visit-detail">
+            <span class="visit-detail-label">Address</span>
+            <span>123 Hilltown Village Center<br>Chesterfield, MO 63017</span>
+          </div>
+          <div class="visit-detail">
+            <span class="visit-detail-label">Hours</span>
+            <span>Mon: Closed<br>Tue–Fri: noon – 8:30pm<br>Sat: 10am – 9pm<br>Sun: 10am – 6pm</span>
+          </div>
+          <div class="visit-detail">
+            <span class="visit-detail-label">Phone</span>
+            <span><a href="tel:+16367781212">(636) 778-1212</a></span>
+          </div>
+        </div>
+        <a href="https://maps.google.com/?q=123+Hilltown+Village+Center+Chesterfield+MO+63017" target="_blank" rel="noopener" class="catering-email-link" style="margin-top:1.5rem;">Get Directions →</a>
+      </div>
+      <div class="visit-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3115.545814052345!2d-90.5551242239608!3d38.6593224607163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87df2b015a018477%3A0x4f0ecfdc5396ddb4!2sSweet%20Tapioca%20Cafe!5e0!3m2!1sen!2sus!4v1772396453753!5m2!1sen!2sus"
+          width="100%"
+          height="100%"
+          style="border:0;border-radius:8px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Sweet Tapioca Cafe — 123 Hilltown Village Center, Chesterfield MO 63017">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page-content -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Visit Us</h4>
+      <address>
+        123 Hilltown Village Center<br>
+        Chesterfield, MO 63017<br><br>
+        <small style="opacity:.45;font-size:.7rem;font-style:normal;">Serving Chesterfield, Wildwood,<br>Ballwin &amp; West St. Louis County</small>
+      </address>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Mon: Closed<br>Tue–Fri: noon – 8:30pm<br>Sat: 10am – 9pm<br>Sun: 10am – 6pm</p>
+    </div>
+    <div>
+      <h4>Get in Touch</h4>
+      <p>
+        <a href="tel:+16367781212">(636) 778-1212</a><br>
+        <a href="mailto:sweettapiocacafe.desserts@gmail.com">sweettapiocacafe.desserts@gmail.com</a>
+      </p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/SweetTapiocaCafe/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.instagram.com/sweettapiocacafe/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        <a href="https://www.tiktok.com/@sweet.tapioca.cafe" target="_blank" rel="noopener" aria-label="TikTok">tt</a>
+      </div>
+    </div>
+  </div>
+  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO</p>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<a href="#" id="scroll-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  const btn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+</script>
+
+</body>
+</html>
