@@ -781,6 +781,7 @@
     <a href="menu.html">Menu</a>
     <a href="events.html">Events &amp; Catering</a>
     <a href="blog.html">Blog</a>
+    <a href="party-packs.html" class="active">Party Packs</a>
   </div>
 </nav>
 
@@ -871,11 +872,6 @@
         Minimum order is $40 — add another Half Gallon or upgrade to a Full Gallon to continue.
       </div>
 
-      <div class="cart-total-row">
-        <span class="cart-total-label">Estimated Total</span>
-        <span class="cart-total-amount" id="cart-total">$0</span>
-      </div>
-      <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="openModal()">Request Order →</button>
     </div>
 
   </div>
@@ -952,6 +948,20 @@
     </div>
   </div>
 
+  <!-- ── ORDER TOTAL + CHECKOUT ── -->
+  <div id="cart-total-section" style="display:none;">
+    <div class="cart-summary" style="margin-top:0;">
+      <div id="cart-min-warning-2" style="display:none;background:#fffbf2;border:1.5px solid #f0ad4e;border-radius:6px;padding:0.65rem 0.9rem;font-size:0.75rem;font-weight:600;color:#854f0b;">
+        Minimum order is $40 — add another Half Gallon or upgrade to a Full Gallon to continue.
+      </div>
+      <div class="cart-total-row">
+        <span class="cart-total-label">Estimated Total</span>
+        <span class="cart-total-amount" id="cart-total">$0</span>
+      </div>
+      <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="openModal()">Request Order →</button>
+    </div>
+  </div>
+
 
   <!-- ── CTA ── -->
   <div class="email-strip">
@@ -1009,16 +1019,22 @@
         <input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name" required>
       </div>
       <div class="field-group">
-        <label for="f-email">Email Address</label>
-        <input type="email" id="f-email" placeholder="you@example.com" autocomplete="email" required>
-      </div>
-      <div class="field-group">
         <label for="f-phone">Phone Number</label>
         <input type="tel" id="f-phone" placeholder="(314) 555-0000" autocomplete="tel">
       </div>
       <div class="field-group">
         <label for="f-date">Preferred Pick-Up Date</label>
         <input type="date" id="f-date">
+        <script>
+          (function(){
+            const d = new Date();
+            d.setHours(d.getHours() + 72);
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth()+1).padStart(2,'0');
+            const dd = String(d.getDate()).padStart(2,'0');
+            document.getElementById('f-date').min = `${yyyy}-${mm}-${dd}`;
+          })();
+        </script>
       </div>
       <button class="modal-submit-btn" onclick="submitOrder()">Send Order Request →</button>
       <p class="modal-note">We'll review your request and send a Clover invoice to your email within 72 hours to confirm and collect payment. Please place orders at least 72 hours before pick-up.</p>
@@ -1266,11 +1282,17 @@
     totalEl.textContent = '$' + total.toFixed(2);
     summary.classList.toggle('visible', hasItems || cooler);
 
+    /* Show/hide the bottom total + checkout section */
+    const totalSection = document.getElementById('cart-total-section');
+    if (totalSection) totalSection.style.display = (hasItems || cooler) ? 'block' : 'none';
+
     /* Minimum order enforcement ($40) */
     const belowMin = hasItems && itemsTotal < MIN_ORDER;
-    const warning = document.getElementById('cart-min-warning');
+    const warning  = document.getElementById('cart-min-warning');
+    const warning2 = document.getElementById('cart-min-warning-2');
     const checkoutBtn = document.getElementById('cart-checkout-btn');
-    if (warning) warning.style.display = belowMin ? 'block' : 'none';
+    if (warning)  warning.style.display  = belowMin ? 'block' : 'none';
+    if (warning2) warning2.style.display = belowMin ? 'block' : 'none';
     if (checkoutBtn) {
       checkoutBtn.disabled = belowMin;
       checkoutBtn.style.opacity = belowMin ? '0.4' : '1';
@@ -1353,12 +1375,12 @@
 
   function submitOrder() {
     const name  = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
+
     const phone = document.getElementById('f-phone').value.trim();
     const date  = document.getElementById('f-date').value;
 
-    if (!name || !email) {
-      alert('Please enter your name and email so we can send you an invoice.');
+    if (!name) {
+      alert('Please enter your name so we can process your order.');
       return;
     }
 
@@ -1381,7 +1403,7 @@
        ───────────────────────────────────────────────────────────── */
     const FORM_ID     = '1FAIpQLSe5Y_IkOzzpiDWD2dRXcS76PQvMH79q7v3LQCHqTKc9USqa9g';
     const ENTRY_NAME  = 'entry.52766765';
-    const ENTRY_EMAIL = 'entry.82380784';
+
     const ENTRY_PHONE = 'entry.313436579';
     const ENTRY_DATE  = 'entry.1233420284';
     const ENTRY_ORDER = 'entry.1237645705';
@@ -1391,7 +1413,7 @@
 
     const formUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url`
       + `&${ENTRY_NAME}=${encodeURIComponent(name)}`
-      + `&${ENTRY_EMAIL}=${encodeURIComponent(email)}`
+
       + `&${ENTRY_PHONE}=${encodeURIComponent(phone)}`
       + `&${ENTRY_DATE}=${encodeURIComponent(date)}`
       + `&${ENTRY_ORDER}=${encodeURIComponent(orderStr)}`;
