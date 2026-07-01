@@ -1139,11 +1139,15 @@
       </div>
       <div class="field-group">
         <label for="f-phone">Phone Number</label>
-        <input type="tel" id="f-phone" placeholder="(314) 555-0000" autocomplete="tel">
+        <input type="tel" id="f-phone" placeholder="(314) 555-0000" autocomplete="tel" required>
+      </div>
+      <div class="field-group">
+        <label for="f-email">Email Address</label>
+        <input type="email" id="f-email" placeholder="jane@email.com" autocomplete="email" required>
       </div>
       <div class="field-group">
         <label for="f-date">Preferred Pick-Up Date</label>
-        <input type="date" id="f-date">
+        <input type="date" id="f-date" required>
         <script>
           (function(){
             const d = new Date();
@@ -1492,12 +1496,16 @@
 
   function submitOrder() {
     const name  = document.getElementById('f-name').value.trim();
-
     const phone = document.getElementById('f-phone').value.trim();
+    const email = document.getElementById('f-email').value.trim();
     const date  = document.getElementById('f-date').value;
 
-    if (!name) {
-      alert('Please enter your name so we can process your order.');
+    if (!name || !phone || !email || !date) {
+      alert('Please fill out all fields — your name, phone, email, and preferred pick-up date — so we can process your order.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address so we can send your invoice.');
       return;
     }
 
@@ -1526,7 +1534,9 @@
     const ENTRY_ORDER = 'entry.1237645705';
 
     const total    = document.getElementById('cart-total').textContent;
-    const orderStr = buildOrderString() + ' | TOTAL: ' + total;
+    /* email is included in the order summary so it's always captured; if you add a
+       dedicated Email field to the Google Form, also wire an ENTRY_EMAIL below */
+    const orderStr = 'EMAIL: ' + email + ' || ' + buildOrderString() + ' | TOTAL: ' + total;
 
     const formUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url`
       + `&${ENTRY_NAME}=${encodeURIComponent(name)}`
