@@ -97,6 +97,8 @@
       --ink:#1c2b4a;
       --muted:#5b6783;
       --line:rgba(14,37,88,0.12);
+      --sky-text:#0e6e9e;   /* WCAG AA sky shade for small text/CTAs on light */
+      --sand-text:#6e6350;  /* WCAG AA sand shade for small text on light */
       --title:'League Spartan', sans-serif;
       --serif:'Playfair Display', serif;
       --body:'Montserrat', sans-serif;
@@ -112,6 +114,12 @@
     }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
+
+    /* ─── ACCESSIBILITY ─── */
+    .skip-link { position:absolute; left:-9999px; top:0; background:var(--navy); color:#fff; padding:0.8rem 1.4rem; z-index:1000; font-weight:700; font-size:0.8rem; border-radius:0 0 8px 0; }
+    .skip-link:focus { left:0; }
+    a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline:none; box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--navy); border-radius:4px; }
+    @media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto;} *,*::before,*::after{transition-duration:0.01ms!important;animation-duration:0.01ms!important;} }
 
     /* ─── BANNER ─── */
     .top-banner {
@@ -177,7 +185,7 @@
       white-space: nowrap;
       transition: background 0.18s ease;
     }
-    .nav-order:hover { background: var(--sky); }
+    .nav-order:hover { background: var(--sky-text); }
 
     /* ─── HERO BAND ─── */
     .hero-band {
@@ -237,7 +245,7 @@
       white-space: nowrap;
       transition: background 0.18s, color 0.18s;
     }
-    .hero-band-cta a:hover { background: var(--sky); color: #fff; }
+    .hero-band-cta a:hover { background: var(--sky-text); color: #fff; }
 
     /* ─── PAGE CONTENT ─── */
     .page-content {
@@ -255,7 +263,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.28em;
-      color: var(--sky);
+      color: var(--sky-text);
       margin-bottom: 0.6rem;
     }
 
@@ -294,7 +302,7 @@
       align-items: center;
       gap: 0.4rem;
       background: var(--sky);
-      color: #fff;
+      color: var(--navy);
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -428,7 +436,7 @@
       border-radius: 999px;
       transition: background 0.18s;
     }
-    .catering-email-link:hover { background: var(--sky); }
+    .catering-email-link:hover { background: var(--sky-text); }
 
     .catering-options {
       display: flex;
@@ -520,7 +528,7 @@
       flex-shrink: 0;
       transition: background 0.18s, color 0.18s;
     }
-    .email-strip a.btn:hover { background: var(--sky); color: #fff; }
+    .email-strip a.btn:hover { background: var(--sky-text); color: #fff; }
 
     /* ─── FOOTER ─── */
     footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 3rem 2.5rem 1.75rem; }
@@ -582,10 +590,10 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      color: var(--sand);
+      color: var(--sand-text);
     }
     .visit-detail span:last-child { font-size: 0.8rem; color: var(--navy); line-height: 1.7; }
-    .visit-detail a { color: var(--sky); }
+    .visit-detail a { color: var(--sky-text); }
     .visit-detail a:hover { text-decoration: underline; }
     .visit-map {
       height: 360px;
@@ -640,6 +648,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <!-- BANNER -->
 <div class="top-banner">
   Serving Chesterfield, Wildwood, Ballwin &amp; West St. Louis County &nbsp;·&nbsp; Book your event: <a href="tel:+16367781212">(636) 778-1212</a>
@@ -660,6 +670,8 @@
   </div>
   <a href="https://www.clover.com/online-ordering/sweet-tapioca-cafe" target="_blank" rel="noopener" class="nav-order">Order Pick Up</a>
 </nav>
+
+<main id="main">
 
 <!-- HERO -->
 <div class="hero-band">
@@ -682,7 +694,7 @@
 
     <!-- Love Island USA Finale -->
     <div class="bts-card" style="background:#0e2558; margin-bottom:1.5rem;">
-      <div class="bts-badge" style="background:#25a4dd; color:#fff;">Watch Party</div>
+      <div class="bts-badge" style="background:#25a4dd; color:#0e2558;">Watch Party</div>
       <p class="bts-date">July 12th &nbsp;·&nbsp; 8 pm &nbsp;·&nbsp; Sweet Tapioca Cafe &nbsp;·&nbsp; Chesterfield, MO</p>
       <h2>Love Island USA<br><em>Finale Slumber Party</em></h2>
       <div class="bts-body">
@@ -694,7 +706,7 @@
 
     <!-- FIFA World Cup Final -->
     <div class="bts-card" style="background:#2f3192; margin-bottom:0;">
-      <div class="bts-badge" style="background:#a79880; color:#fff;">Game Day Festival</div>
+      <div class="bts-badge" style="background:#a79880; color:#0e2558;">Game Day Festival</div>
       <p class="bts-date">July 19th &nbsp;·&nbsp; 2 pm &nbsp;·&nbsp; Sweet Tapioca Cafe &nbsp;·&nbsp; Chesterfield, MO</p>
       <h2>FIFA World Cup Final<br><em>Game Day Festival</em></h2>
       <div class="bts-body">
@@ -828,6 +840,8 @@
 
 </div><!-- end page-content -->
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -862,7 +876,7 @@
       </div>
     </div>
   </div>
-  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO</p>
+  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO &nbsp;·&nbsp; <a href="mailto:sweettapioca.desserts@gmail.com?subject=Accessibility%20feedback">Accessibility feedback</a></p>
 </footer>
 
 <!-- SCROLL TO TOP -->

@@ -7,7 +7,7 @@
   <meta name="description" content="Explore the full Sweet Tapioca Cafe menu — handcrafted milk teas, fruit teas, matchas, cold coffees, Korean bingsu, artisan macarons, smoothies, and more. Chesterfield, MO."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700;800&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -30,12 +30,30 @@
   <meta name="twitter:image" content="https://sweettapiocacafe.com/og-image.png">
 
   <style>
+    :root{
+      --navy:#0e2558;
+      --navy-2:#15336f;
+      --indigo:#2f3192;
+      --sky:#25a4dd;
+      --sand:#a79880;
+      --stone:#cbc2b4;
+      --cream:#f4f1eb;
+      --paper:#faf8f4;
+      --ink:#1c2b4a;
+      --muted:#5b6783;
+      --line:rgba(14,37,88,0.12);
+      --sky-text:#0e6e9e;   /* WCAG AA sky shade for small text/CTAs on light */
+      --sand-text:#6e6350;  /* WCAG AA sand shade for small text on light */
+      --title:'League Spartan', sans-serif;
+      --serif:'Playfair Display', serif;
+      --body:'Montserrat', sans-serif;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: #f2f0ed;
-      color: #1a1a1a;
+      font-family: var(--body);
+      background: var(--cream);
+      color: var(--ink);
       -webkit-font-smoothing: antialiased;
       max-width: 100%;
       overflow-x: hidden;
@@ -43,22 +61,30 @@
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
 
+    /* ─── ACCESSIBILITY ─── */
+    .skip-link { position:absolute; left:-9999px; top:0; background:var(--navy); color:#fff; padding:0.8rem 1.4rem; z-index:1000; font-weight:700; font-size:0.8rem; border-radius:0 0 8px 0; }
+    .skip-link:focus { left:0; }
+    a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline:none; box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--navy); border-radius:4px; }
+    @media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto;} *,*::before,*::after{transition-duration:0.01ms!important;animation-duration:0.01ms!important;} }
+
     /* ─── BANNER ─── */
     .top-banner {
-      background: #25a4dd;
-      color: #fff;
-      padding: 0.75rem 2rem;
+      background: var(--navy);
+      color: rgba(255,255,255,0.85);
+      padding: 0.7rem 2rem;
       text-align: center;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
-    .top-banner a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+    .top-banner a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 
     /* ─── NAV ─── */
     nav {
-      background: #f2f0ed;
-      border-bottom: 1px solid rgba(14,37,88,0.1);
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
       display: flex;
       align-items: center;
       padding: 0.5rem 2.5rem;
@@ -66,69 +92,112 @@
       top: 0;
       z-index: 200;
     }
-    .nav-logo { display: flex; align-items: center; flex-shrink: 0; margin-right: 2rem; }
-    .nav-links { display: flex; align-items: center; flex-wrap: wrap; }
+    .nav-logo { display: flex; align-items: center; flex-shrink: 0; margin-right: 2.25rem; }
+    .nav-links { display: flex; align-items: center; flex-wrap: wrap; gap: 0.25rem; }
     .nav-links a {
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #0e2558;
-      opacity: 0.65;
-      padding: 0.45rem 0.9rem;
-      border-right: 1px solid rgba(14,37,88,0.18);
+      letter-spacing: 0.16em;
+      color: var(--navy);
+      opacity: 0.6;
+      padding: 0.5rem 0.9rem;
+      position: relative;
       white-space: nowrap;
       transition: opacity 0.18s ease;
     }
-    .nav-links a:first-child { border-left: 1px solid rgba(14,37,88,0.18); }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0.9rem; right: 0.9rem; bottom: 0.15rem;
+      height: 2px;
+      background: var(--sky);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease;
+    }
     .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-links a.active::after, .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-order {
+      margin-left: auto;
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.66rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background 0.18s ease;
+    }
+    .nav-order:hover { background: var(--sky-text); }
 
     /* ─── HERO BAND ─── */
     .hero-band {
-      background: #0e2558;
-      padding: 2.25rem 3rem;
+      position: relative;
+      background: var(--navy);
+      padding: 3rem 3rem 3.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
+      overflow: hidden;
     }
-    .hero-band-text { max-width: 640px; }
+    .hero-band::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(800px 460px at 15% -10%, rgba(37,164,221,0.2), transparent 60%),
+        radial-gradient(640px 460px at 105% 120%, rgba(47,49,146,0.4), transparent 55%);
+      pointer-events: none;
+    }
+    .hero-band-text { position: relative; max-width: 660px; }
     .hero-band-label {
-      font-size: 0.6rem;
+      font-size: 0.62rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 0.55rem;
+      letter-spacing: 0.28em;
+      color: var(--sky);
+      margin-bottom: 0.75rem;
     }
     .hero-band h1 {
-      font-size: clamp(1.15rem, 2.2vw, 1.6rem);
-      font-weight: 800;
-      font-style: italic;
+      font-family: var(--title);
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
       color: #fff;
-      line-height: 1.3;
-      margin-bottom: 0.6rem;
+      line-height: 1.1;
+      margin-bottom: 0.7rem;
     }
-    .hero-band p { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.7; }
+    .hero-band p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--stone);
+      line-height: 1.6;
+    }
+    .hero-band-cta { position: relative; }
     .hero-band-cta a {
       display: inline-block;
       background: #fff;
-      color: #0e2558;
-      font-size: 0.75rem;
+      color: var(--navy);
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      padding: 0.85rem 1.75rem;
-      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.95rem 1.9rem;
+      border-radius: 999px;
       white-space: nowrap;
       transition: background 0.18s, color 0.18s;
     }
-    .hero-band-cta a:hover { background: #25a4dd; color: #fff; }
+    .hero-band-cta a:hover { background: var(--sky-text); color: #fff; }
 
     /* ─── MENU TABS ─── */
     .menu-tabs-wrap {
-      background: #fff;
-      border-bottom: 1px solid rgba(14,37,88,0.08);
-      box-shadow: 0 2px 8px rgba(14,37,88,0.06);
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 2px 8px rgba(14,37,88,0.05);
       position: sticky;
       top: 86px;
       z-index: 100;
@@ -146,15 +215,15 @@
       font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       color: rgba(14,37,88,0.5);
       padding: 1rem 1.25rem;
       white-space: nowrap;
       border-bottom: 2px solid transparent;
       transition: all 0.18s;
     }
-    .menu-tab:hover { color: #0e2558; border-bottom-color: rgba(14,37,88,0.2); }
-    .menu-tab.active { color: #0e2558; border-bottom-color: #25a4dd; }
+    .menu-tab:hover { color: var(--navy); border-bottom-color: var(--stone); }
+    .menu-tab.active { color: var(--navy); border-bottom-color: var(--sky); }
 
     /* ─── MAIN CONTENT ─── */
     .menu-content {
@@ -176,27 +245,31 @@
       gap: 1.5rem;
       margin-bottom: 1.75rem;
       padding-bottom: 1rem;
-      border-bottom: 2px solid #e8e4df;
+      border-bottom: 2px solid rgba(167,152,128,0.35);
     }
     .section-header-text { flex: 1; }
     .section-eyebrow {
       font-size: 0.58rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: rgba(14,37,88,0.4);
+      letter-spacing: 0.28em;
+      color: var(--sky-text);
       margin-bottom: 0.35rem;
     }
     .section-header h2 {
-      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
-      font-weight: 800;
-      color: #0e2558;
-      line-height: 1.15;
+      font-family: var(--title);
+      font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--navy);
+      line-height: 1.12;
     }
     .section-header p {
-      font-size: 0.78rem;
-      color: #526288;
-      line-height: 1.6;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--sand-text);
+      line-height: 1.55;
       margin-top: 0.4rem;
     }
     .section-blob {
@@ -218,14 +291,14 @@
 
     /* ─── SUB-SECTION LABEL ─── */
     .sub-label {
-      font-size: 0.6rem;
+      font-size: 0.62rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: rgba(14,37,88,0.4);
+      letter-spacing: 0.24em;
+      color: var(--sand-text);
       margin: 1.75rem 0 0.85rem;
       padding-bottom: 0.5rem;
-      border-bottom: 1px solid #e8e4df;
+      border-bottom: 1px solid rgba(167,152,128,0.3);
     }
 
     /* ─── ITEM GRIDS ─── */
@@ -236,26 +309,29 @@
     /* ─── MENU ITEM CARD ─── */
     .menu-item {
       background: #fff;
-      border-radius: 8px;
-      padding: 1.1rem 1.35rem;
-      border: 1.5px solid #e8e4df;
-      transition: border-color 0.18s, box-shadow 0.18s;
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--line);
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
     }
     .menu-item:hover {
-      border-color: rgba(14,37,88,0.25);
-      box-shadow: 0 3px 14px rgba(14,37,88,0.07);
+      border-color: rgba(14,37,88,0.28);
+      box-shadow: 0 6px 18px rgba(14,37,88,0.08);
+      transform: translateY(-2px);
     }
-    .menu-item.featured { border-color: #0e2558; }
+    .menu-item.featured { border-color: rgba(14,37,88,0.4); }
     .item-name {
-      font-size: 0.85rem;
+      font-family: var(--title);
+      font-size: 0.95rem;
       font-weight: 700;
-      color: #0e2558;
-      margin-bottom: 0.25rem;
-      line-height: 1.3;
+      letter-spacing: -0.005em;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+      line-height: 1.25;
     }
     .item-desc {
       font-size: 0.72rem;
-      color: #526288;
+      color: var(--muted);
       line-height: 1.6;
       margin-bottom: 0.55rem;
     }
@@ -265,66 +341,104 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.07em;
-      padding: 0.18rem 0.5rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 999px;
-      background: #f2f0ed;
+      background: var(--cream);
       color: rgba(14,37,88,0.5);
     }
-    .item-tag.tag-popular  { background: #fff3e0; color: #b85c00; }
-    .item-tag.tag-leaving  { background: #fdecea; color: #c0392b; }
-    .item-tag.tag-df       { background: #e8f7ff; color: #0e86c0; }
-    .item-tag.tag-gf       { background: #f0edff; color: #4a2d99; }
-    .item-tag.tag-cf       { background: #f0f8f0; color: #2a6e1a; }
+    .item-tag.tag-popular  { background: rgba(167,152,128,0.18); color: #7d6c52; }
+    .item-tag.tag-leaving  { background: rgba(47,49,146,0.1); color: var(--indigo); }
+    .item-tag.tag-df       { background: rgba(37,164,221,0.12); color: #0e86c0; }
+    .item-tag.tag-gf       { background: rgba(47,49,146,0.1); color: var(--indigo); }
+    .item-tag.tag-cf       { background: rgba(37,164,221,0.12); color: #0e86c0; }
 
     /* ─── CUSTOMIZATION CALLOUT ─── */
     .customize-banner {
-      background: #0e2558;
-      border-radius: 8px;
-      padding: 1.1rem 1.5rem;
+      position: relative;
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 1.35rem 1.6rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.1rem;
       margin-top: 1.25rem;
+      overflow: hidden;
     }
+    .customize-banner::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(500px 280px at 100% 120%, rgba(37,164,221,0.25), transparent 60%);
+      pointer-events: none;
+    }
+    .customize-banner > * { position: relative; }
     .customize-banner p { font-size: 0.75rem; color: rgba(255,255,255,0.85); line-height: 1.6; }
     .customize-banner strong { color: #fff; }
-    .customize-icon { font-size: 1.35rem; flex-shrink: 0; }
+    .customize-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .customize-icon svg { width: 22px; height: 22px; }
 
     /* ─── DIVIDER ─── */
     .section-divider {
       height: 1px;
-      background: linear-gradient(to right, transparent, #e8e4df 20%, #e8e4df 80%, transparent);
+      background: linear-gradient(to right, transparent, rgba(167,152,128,0.4) 20%, rgba(167,152,128,0.4) 80%, transparent);
       margin: 3rem 0;
     }
 
     /* ─── ORDER CTA STRIP ─── */
     .order-strip {
-      background: #25a4dd;
-      padding: 2rem 3rem;
+      position: relative;
+      background: var(--navy);
+      padding: 2.5rem 3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
+      overflow: hidden;
     }
-    .order-strip h2 { font-size: clamp(1rem, 2vw, 1.35rem); font-weight: 800; color: #fff; }
-    .order-strip p { font-size: 0.78rem; color: rgba(255,255,255,0.85); margin-top: 0.3rem; }
+    .order-strip::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(700px 400px at 85% -20%, rgba(37,164,221,0.3), transparent 60%);
+      pointer-events: none;
+    }
+    .order-strip > * { position: relative; }
+    .order-strip h2 {
+      font-family: var(--title);
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #fff;
+    }
+    .order-strip p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--stone);
+      margin-top: 0.35rem;
+    }
     .order-strip a {
       display: inline-block;
       background: #fff;
-      color: #0e2558;
-      font-size: 0.75rem;
+      color: var(--navy);
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      padding: 0.85rem 1.75rem;
-      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.95rem 1.9rem;
+      border-radius: 999px;
       white-space: nowrap;
       flex-shrink: 0;
       transition: background 0.18s, color 0.18s;
     }
-    .order-strip a:hover { background: #0e2558; color: #fff; }
+    .order-strip a:hover { background: var(--sky-text); color: #fff; }
 
     /* ─── FOOTER ─── */
-    footer { background: #0e2558; color: rgba(255,255,255,0.55); padding: 2.5rem 2.5rem 1.75rem; }
+    footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 3rem 2.5rem 1.75rem; }
     .footer-inner {
       max-width: 1100px;
       padding: 0 0 2rem;
@@ -332,30 +446,35 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    footer h4 { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #25a4dd; margin-bottom: 0.85rem; }
-    footer p, footer address { font-style: normal; font-size: 0.78rem; line-height: 1.9; }
+    footer h4 { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.24em; color: var(--sky); margin-bottom: 0.9rem; }
+    footer p, footer address { font-style: normal; font-size: 0.78rem; line-height: 1.95; }
     footer a { color: rgba(255,255,255,0.55); transition: color 0.18s; }
-    footer a:hover { color: #25a4dd; }
-    .footer-social { display: flex; gap: 0.6rem; margin-top: 0.75rem; }
+    footer a:hover { color: var(--sky); }
+    .footer-social { display: flex; gap: 0.6rem; margin-top: 0.85rem; }
     .footer-social a {
-      width: 30px; height: 30px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.2);
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.58rem; font-weight: 800; color: rgba(255,255,255,0.5);
       transition: all 0.18s;
     }
-    .footer-social a:hover { background: #25a4dd; border-color: #25a4dd; color: #fff; }
-    .footer-bottom { max-width: 1100px; padding: 0; margin: 1.5rem auto 0; font-size: 0.68rem; text-align: center; }
+    .footer-social svg { width: 14px; height: 14px; fill: rgba(255,255,255,0.6); transition: fill 0.18s; }
+    .footer-social a:hover { background: var(--sky); border-color: var(--sky); }
+    .footer-social a:hover svg { fill: #fff; }
+    .footer-bottom { max-width: 1100px; padding: 0; margin: 1.5rem auto 0; font-size: 0.66rem; letter-spacing: 0.06em; text-align: center; }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 820px) {
       body { overflow-x: hidden; }
-      .top-banner { font-size: 0.65rem; padding: 0.6rem 1rem; }
-      nav { padding: 0.75rem 1rem; }
-      .nav-links a { font-size: 0.55rem; padding: 0.45rem 0.6rem; }
-      .hero-band { flex-direction: column; padding: 1.75rem 1.25rem; gap: 1.25rem; }
+      .top-banner { font-size: 0.6rem; padding: 0.6rem 1rem; }
+      nav { padding: 0.6rem 1rem; }
+      .nav-logo img { height: 64px !important; }
+      .nav-links a { font-size: 0.58rem; padding: 0.4rem 0.5rem; letter-spacing: 0.1em; }
+      .nav-links a::after { left: 0.5rem; right: 0.5rem; }
+      .nav-order { display: none; }
+      .hero-band { flex-direction: column; align-items: flex-start; padding: 2rem 1.25rem 2.25rem; gap: 1.25rem; }
+      .hero-band-cta { width: 100%; }
       .hero-band-cta a { width: 100%; text-align: center; display: block; }
       .menu-tabs-wrap { top: 72px; box-shadow: 0 2px 8px rgba(14,37,88,0.06); }
       .menu-tabs { padding: 0 1rem; }
@@ -383,15 +502,17 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <!-- BANNER -->
 <div class="top-banner">
-  Now serving Chesterfield, Wildwood, Ballwin &amp; West St. Louis County &nbsp;·&nbsp; Call us to book your event: <a href="tel:+16367781212">(636) 778-1212</a>
+  Serving Chesterfield, Wildwood, Ballwin &amp; West St. Louis County &nbsp;·&nbsp; Book your event: <a href="tel:+16367781212">(636) 778-1212</a>
 </div>
 
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <img src="Sweet Tapioca Logo.png" alt="Sweet Tapioca Cafe" style="height:85px;width:auto;display:block;" />
+    <img src="Sweet Tapioca Logo.png" alt="Sweet Tapioca Cafe" style="height:78px;width:auto;display:block;" />
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
@@ -399,8 +520,12 @@
     <a href="events.html">Events &amp; Catering</a>
     <a href="blog.html">Blog</a>
     <a href="https://sweettapiocacafe.com/party-packs">Party Packs</a>
+    <a href="https://sweettapiocacafe.com/club">The Club</a>
   </div>
+  <a href="https://www.clover.com/online-ordering/sweet-tapioca-cafe-chesterfield" target="_blank" rel="noopener" class="nav-order">Order Pick Up</a>
 </nav>
+
+<main id="main">
 
 <!-- HERO -->
 <div class="hero-band">
@@ -557,7 +682,13 @@
     </div>
 
     <div class="customize-banner">
-      <div class="customize-icon">🧋</div>
+      <div class="customize-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#25a4dd" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="9" r="2.4"/>
+          <circle cx="16" cy="9" r="2.4"/>
+          <circle cx="12" cy="16" r="2.4"/>
+        </svg>
+      </div>
       <div>
         <p style="margin-bottom:0.55rem;"><strong>Make it yours.</strong> Choose your sweetness (0–100%), ice level, and topping:</p>
         <p style="margin-bottom:0.3rem; font-size:0.72rem; color:rgba(255,255,255,0.85);"><strong style="color:#fff;">Popping Boba —</strong> Lychee · Mango · Peach · Pomegranate · Strawberry</p>
@@ -687,8 +818,14 @@
     </div>
 
     <div class="customize-banner">
-      <div class="customize-icon">☕</div>
-      <p><strong>🌸 Spring Seasonals available now:</strong> Bangkok Buzz Lemonade, Pop Bouquet Sparkling, Spring Rain Milk Tea, and Banana Bread "Dirty" Chai. Ask your barista!</p>
+      <div class="customize-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#25a4dd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2 C13.5 5 16.5 6 16.5 9.5 A4.5 4.5 0 0 1 7.5 9.5 C7.5 6 10.5 5 12 2Z"/>
+          <path d="M5 15 C7 17.5 10 18.5 12 18.5 C14 18.5 17 17.5 19 15"/>
+          <path d="M7 19 C8.5 20.5 10.5 21.2 12 21.2 C13.5 21.2 15.5 20.5 17 19"/>
+        </svg>
+      </div>
+      <p><strong>Summer Seasonals available now:</strong> Campfire Cold Brew, Liberty Lemonade, Mermaid Smoothie, and Bubble Melon Sparkling — plus our new s'mores bingsu. Ask your barista!</p>
     </div>
   </section>
 
@@ -917,7 +1054,13 @@
     </div>
 
     <div class="customize-banner" style="margin-top:1.25rem;">
-      <div class="customize-icon">🍡</div>
+      <div class="customize-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#25a4dd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 13 H20 L18 21 H6 Z"/>
+          <path d="M6 13 C6 8 8.5 5 12 5 C15.5 5 18 8 18 13"/>
+          <line x1="12" y1="5" x2="12" y2="3"/>
+        </svg>
+      </div>
       <p><strong>Bingsu tip:</strong> Best enjoyed fresh and great to share. Ask about extra toppings at the counter — red bean, mochi, fresh fruit, or condensed milk drizzle.</p>
     </div>
 
@@ -994,16 +1137,18 @@
 </div>
 
 <!-- DISCLAIMERS -->
-<div style="background:#f2f0ed; padding:1.5rem 3rem; border-top:1px solid #e8e4df;">
+<div style="background:#f4f1eb; padding:1.5rem 3rem; border-top:1px solid rgba(167,152,128,0.3);">
   <div style="max-width:1100px; margin:0 auto; display:flex; flex-direction:column; gap:0.6rem;">
-    <p style="font-size:0.72rem; color:#526288; line-height:1.7;">
-      🌿 <strong style="color:#0e2558;">Milk substitutions available:</strong> Oat milk and almond milk substitutions are offered upon request for most drinks.
+    <p style="font-size:0.72rem; color:#5b6783; line-height:1.7;">
+      <strong style="color:#0e2558;">Milk substitutions available:</strong> Oat milk and almond milk substitutions are offered upon request for most drinks.
     </p>
     <p style="font-size:0.68rem; color:rgba(14,37,88,0.45); line-height:1.7;">
       <strong style="color:rgba(14,37,88,0.55);">Allergen Notice:</strong> Sweet Tapioca Cafe is not an allergen-free facility. Our products may contain or come into contact with common allergens including milk, eggs, wheat, soy, tree nuts, and peanuts. We cannot guarantee that any item is free from allergens or cross-contamination. Guests with food allergies or dietary restrictions consume our products at their own risk. Please consult with our staff before ordering if you have concerns.
     </p>
   </div>
 </div>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -1018,7 +1163,7 @@
     </div>
     <div>
       <h4>Hours</h4>
-      <p>Mon: Closed<br>Tue–Fri: noon – 8:30pm<br>Sat: 10am – 9pm<br>Sun: 10am – 6pm</p>
+      <p>Mon: Member-only events<br>Tue–Thu: noon – 8pm<br>Fri: noon – 9pm<br>Sat: 10am – 9pm<br>Sun: 10am – 6pm</p>
     </div>
     <div>
       <h4>Get in Touch</h4>
@@ -1027,13 +1172,19 @@
         <a href="mailto:sweettapioca.desserts@gmail.com">sweettapioca.desserts@gmail.com</a>
       </p>
       <div class="footer-social">
-        <a href="https://www.facebook.com/SweetTapiocaCafe/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-        <a href="https://www.instagram.com/sweettapiocacafe/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
-        <a href="https://www.tiktok.com/@sweet.tapioca.cafe" target="_blank" rel="noopener" aria-label="TikTok">tt</a>
+        <a href="https://www.facebook.com/SweetTapiocaCafe/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.6c0-.9.3-1.6 1.7-1.6H16.6V4.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.2H7.5v3h2.7V21h3.3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/sweettapiocacafe/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.3c2.5 0 2.8 0 3.8.06 1 .04 1.5.2 1.9.34.5.18.8.4 1.2.78.37.37.6.72.78 1.2.14.36.3.9.34 1.9.05 1 .06 1.3.06 3.8s0 2.8-.06 3.8c-.04 1-.2 1.5-.34 1.9a3.2 3.2 0 0 1-.78 1.2 3.2 3.2 0 0 1-1.2.78c-.36.14-.9.3-1.9.34-1 .05-1.3.06-3.8.06s-2.8 0-3.8-.06c-1-.04-1.5-.2-1.9-.34a3.2 3.2 0 0 1-1.2-.78 3.2 3.2 0 0 1-.78-1.2c-.14-.36-.3-.9-.34-1.9-.05-1-.06-1.3-.06-3.8s0-2.8.06-3.8c.04-1 .2-1.5.34-1.9.18-.5.4-.8.78-1.2.37-.37.72-.6 1.2-.78.36-.14.9-.3 1.9-.34 1-.05 1.3-.06 3.8-.06M12 2.6c-2.6 0-2.9 0-3.9.06-1 .05-1.7.2-2.3.45a4.9 4.9 0 0 0-1.8 1.16 4.9 4.9 0 0 0-1.16 1.8c-.24.6-.4 1.3-.45 2.3C2.3 9.4 2.3 9.7 2.3 12.3s0 2.9.06 3.9c.05 1 .2 1.7.45 2.3.25.66.6 1.2 1.16 1.8.56.56 1.1.9 1.8 1.16.6.24 1.3.4 2.3.45 1 .05 1.3.06 3.9.06s2.9 0 3.9-.06c1-.05 1.7-.2 2.3-.45a4.9 4.9 0 0 0 1.8-1.16 4.9 4.9 0 0 0 1.16-1.8c.24-.6.4-1.3.45-2.3.05-1 .06-1.3.06-3.9s0-2.9-.06-3.9c-.05-1-.2-1.7-.45-2.3a4.9 4.9 0 0 0-1.16-1.8 4.9 4.9 0 0 0-1.8-1.16c-.6-.24-1.3-.4-2.3-.45-1-.05-1.3-.06-3.9-.06zm0 4.7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.5 3.2 3.2 0 0 1 0 6.5zM18.4 7.1a1.2 1.2 0 1 1-2.3 0 1.2 1.2 0 0 1 2.3 0z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@sweet.tapioca.cafe" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.6 3c.36 2 1.6 3.5 3.6 3.8v2.6c-1.3.04-2.5-.34-3.6-1.06v6.06c0 4-2.8 6-5.9 6-2.9 0-5.5-2.2-5.5-5.4 0-3.5 3-5.7 6.2-5.2v2.7c-.4-.1-.8-.16-1.2-.13-1.4.1-2.4 1.2-2.4 2.6 0 1.6 1.3 2.8 2.8 2.8 1.6 0 2.8-1.2 2.8-3V3h3.2z"/></svg>
+        </a>
       </div>
     </div>
   </div>
-  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO</p>
+  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO &nbsp;·&nbsp; <a href="mailto:sweettapioca.desserts@gmail.com?subject=Accessibility%20feedback">Accessibility feedback</a></p>
 </footer>
 
 <script>

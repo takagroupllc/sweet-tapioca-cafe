@@ -42,6 +42,8 @@
       --ink:#1c2b4a;
       --muted:#5b6783;
       --line:rgba(14,37,88,0.12);
+      --sky-text:#0e6e9e;   /* WCAG AA sky shade for small text/CTAs on light */
+      --sand-text:#6e6350;  /* WCAG AA sand shade for small text on light */
       --title:'League Spartan', sans-serif;
       --serif:'Playfair Display', serif;
       --body:'Montserrat', sans-serif;
@@ -57,6 +59,12 @@
     }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
+
+    /* ─── ACCESSIBILITY ─── */
+    .skip-link { position:absolute; left:-9999px; top:0; background:var(--navy); color:#fff; padding:0.8rem 1.4rem; z-index:1000; font-weight:700; font-size:0.8rem; border-radius:0 0 8px 0; }
+    .skip-link:focus { left:0; }
+    a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline:none; box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--navy); border-radius:4px; }
+    @media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto;} *,*::before,*::after{transition-duration:0.01ms!important;animation-duration:0.01ms!important;} }
 
     /* ─── BANNER ─── */
     .top-banner {
@@ -122,7 +130,7 @@
       white-space: nowrap;
       transition: background 0.18s ease;
     }
-    .nav-order:hover { background: var(--sky); }
+    .nav-order:hover { background: var(--sky-text); }
 
     /* ─── HERO BAND ─── */
     .hero-band {
@@ -182,7 +190,7 @@
       transition: background 0.18s, color 0.18s;
       cursor: pointer;
     }
-    .hero-band-cta a:hover { background: var(--sky); color: #fff; }
+    .hero-band-cta a:hover { background: var(--sky-text); color: #fff; }
 
     /* ─── PAGE CONTENT ─── */
     .page-content {
@@ -200,7 +208,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.28em;
-      color: var(--sky);
+      color: var(--sky-text);
       margin-bottom: 0.6rem;
     }
 
@@ -297,7 +305,7 @@
     }
     .price-card.recommended .price-size,
     .price-card.recommended .price-tag { color: #0e2558; }
-    .price-card.recommended .price-serves { color: #2d7da8; }
+    .price-card.recommended .price-serves { color: #0e6e9e; }
     .price-card.recommended .price-badge {
       background: #25a4dd;
       color: #fff;
@@ -512,7 +520,7 @@
       appearance: auto;
     }
     .flavor-select:focus { border-color: #25a4dd; }
-    .flavor-select.unset { color: #999; border-color: #f0ad4e; background: #fffbf2; }
+    .flavor-select.unset { color: #6b6b6b; border-color: #b26f00; background: #fffbf2; }
 
     .cart-checkout-btn {
       display: block;
@@ -531,7 +539,7 @@
       text-align: center;
       transition: background 0.18s;
     }
-    .cart-checkout-btn:hover { background: var(--sky); }
+    .cart-checkout-btn:hover { background: var(--sky-text); }
 
     /* ─── MODAL ─── */
     .modal-overlay {
@@ -615,7 +623,7 @@
       transition: background 0.18s;
       margin-top: 0.25rem;
     }
-    .modal-submit-btn:hover { background: var(--sky); }
+    .modal-submit-btn:hover { background: var(--sky-text); }
     .modal-note {
       font-size: 0.68rem;
       color: #526288;
@@ -712,7 +720,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.22em;
-      color: var(--sky);
+      color: var(--sky-text);
     }
     .step h3 {
       font-family: var(--title);
@@ -870,6 +878,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <!-- BANNER -->
 <div class="top-banner">
   Serving Chesterfield, Wildwood, Ballwin &amp; West St. Louis County &nbsp;·&nbsp; Call us to order: <a href="tel:+16367781212">(636) 778-1212</a>
@@ -890,6 +900,8 @@
   </div>
   <a href="https://www.clover.com/online-ordering/sweet-tapioca-cafe" target="_blank" rel="noopener" class="nav-order">Order Pick Up</a>
 </nav>
+
+<main id="main">
 
 <!-- HERO -->
 <div class="hero-band">
@@ -937,9 +949,9 @@
         <div style="font-size:0.68rem;color:#888;margin-top:-0.25rem;">Some drinks $30</div>
         <div class="qty-row">
           <span class="qty-label">Qty</span>
-          <button class="qty-btn" onclick="changeQty('half',false)">−</button>
-          <span class="qty-num" id="qty-half">0</span>
-          <button class="qty-btn" onclick="changeQty('half',true)">+</button>
+          <button class="qty-btn" aria-label="Decrease Half Gallon quantity" onclick="changeQty('half',false)">−</button>
+          <span class="qty-num" id="qty-half" aria-live="polite">0</span>
+          <button class="qty-btn" aria-label="Increase Half Gallon quantity" onclick="changeQty('half',true)">+</button>
         </div>
       </div>
 
@@ -948,12 +960,12 @@
         <div class="price-size">Full Gallon</div>
         <div class="price-serves">Serves ~10 people</div>
         <div class="price-tag">From $40</div>
-        <div style="font-size:0.68rem;color:#2d7da8;margin-top:-0.25rem;">Some drinks $50</div>
+        <div style="font-size:0.68rem;color:#0e6e9e;margin-top:-0.25rem;">Some drinks $50</div>
         <div class="qty-row">
           <span class="qty-label">Qty</span>
-          <button class="qty-btn" onclick="changeQty('full',false)">−</button>
-          <span class="qty-num" id="qty-full">0</span>
-          <button class="qty-btn" onclick="changeQty('full',true)">+</button>
+          <button class="qty-btn" aria-label="Decrease Full Gallon quantity" onclick="changeQty('full',false)">−</button>
+          <span class="qty-num" id="qty-full" aria-live="polite">0</span>
+          <button class="qty-btn" aria-label="Increase Full Gallon quantity" onclick="changeQty('full',true)">+</button>
         </div>
       </div>
 
@@ -964,7 +976,7 @@
       <h3>Your Order</h3>
       <div id="cart-lines"></div>
 
-      <div style="background:#e8f6fd;border:1px solid #25a4dd;border-radius:10px;padding:0.75rem 1rem;font-size:0.75rem;color:#2d7da8;line-height:1.6;">
+      <div style="background:#e8f6fd;border:1px solid #25a4dd;border-radius:10px;padding:0.75rem 1rem;font-size:0.75rem;color:#0e6e9e;line-height:1.6;">
         <strong>Boba add-on:</strong> Select a boba type per size above — we recommend <strong>50g per cup</strong>. Amounts are calculated automatically.
       </div>
 
@@ -1021,9 +1033,9 @@
               <div style="font-size:0.72rem;color:#526288;">$0.50 each</div>
             </div>
             <div style="display:flex;align-items:center;gap:0.6rem;">
-              <button class="qty-btn" onclick="changeSupply('cups',false)" style="width:28px;height:28px;font-size:1rem;">−</button>
-              <span id="qty-cups" style="font-size:0.9rem;font-weight:800;color:#0e2558;min-width:1.5rem;text-align:center;">0</span>
-              <button class="qty-btn" onclick="changeSupply('cups',true)" style="width:28px;height:28px;font-size:1rem;">+</button>
+              <button class="qty-btn" aria-label="Decrease cups quantity" onclick="changeSupply('cups',false)" style="width:28px;height:28px;font-size:1rem;">−</button>
+              <span id="qty-cups" aria-live="polite" style="font-size:0.9rem;font-weight:800;color:#0e2558;min-width:1.5rem;text-align:center;">0</span>
+              <button class="qty-btn" aria-label="Increase cups quantity" onclick="changeSupply('cups',true)" style="width:28px;height:28px;font-size:1rem;">+</button>
             </div>
           </div>
 
@@ -1035,9 +1047,9 @@
               <div style="font-size:0.72rem;color:#526288;">$0.25 each</div>
             </div>
             <div style="display:flex;align-items:center;gap:0.6rem;">
-              <button class="qty-btn" onclick="changeSupply('lids',false)" style="width:28px;height:28px;font-size:1rem;">−</button>
-              <span id="qty-lids" style="font-size:0.9rem;font-weight:800;color:#0e2558;min-width:1.5rem;text-align:center;">0</span>
-              <button class="qty-btn" onclick="changeSupply('lids',true)" style="width:28px;height:28px;font-size:1rem;">+</button>
+              <button class="qty-btn" aria-label="Decrease cup lids quantity" onclick="changeSupply('lids',false)" style="width:28px;height:28px;font-size:1rem;">−</button>
+              <span id="qty-lids" aria-live="polite" style="font-size:0.9rem;font-weight:800;color:#0e2558;min-width:1.5rem;text-align:center;">0</span>
+              <button class="qty-btn" aria-label="Increase cup lids quantity" onclick="changeSupply('lids',true)" style="width:28px;height:28px;font-size:1rem;">+</button>
             </div>
           </div>
 
@@ -1049,9 +1061,9 @@
               <div style="font-size:0.72rem;color:#526288;">$0.25 each</div>
             </div>
             <div style="display:flex;align-items:center;gap:0.6rem;">
-              <button class="qty-btn" onclick="changeSupply('straws',false)" style="width:28px;height:28px;font-size:1rem;">−</button>
-              <span id="qty-straws" style="font-size:0.9rem;font-weight:800;color:#0e2558;min-width:1.5rem;text-align:center;">0</span>
-              <button class="qty-btn" onclick="changeSupply('straws',true)" style="width:28px;height:28px;font-size:1rem;">+</button>
+              <button class="qty-btn" aria-label="Decrease straws quantity" onclick="changeSupply('straws',false)" style="width:28px;height:28px;font-size:1rem;">−</button>
+              <span id="qty-straws" aria-live="polite" style="font-size:0.9rem;font-weight:800;color:#0e2558;min-width:1.5rem;text-align:center;">0</span>
+              <button class="qty-btn" aria-label="Increase straws quantity" onclick="changeSupply('straws',true)" style="width:28px;height:28px;font-size:1rem;">+</button>
             </div>
           </div>
 
@@ -1069,7 +1081,7 @@
       </div>
       <div class="cart-total-row">
         <span class="cart-total-label">Estimated Total</span>
-        <span class="cart-total-amount" id="cart-total">$0</span>
+        <span class="cart-total-amount" id="cart-total" aria-live="polite">$0</span>
       </div>
       <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="openModal()">Request Order →</button>
     </div>
@@ -1086,6 +1098,8 @@
   </div>
 
 </div><!-- end page-content -->
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -1121,7 +1135,7 @@
       </div>
     </div>
   </div>
-  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO</p>
+  <p class="footer-bottom">&copy; 2026 Sweet Tapioca Cafe &nbsp;·&nbsp; Boba Tea &amp; Desserts &nbsp;·&nbsp; Chesterfield, MO &nbsp;·&nbsp; <a href="mailto:sweettapioca.desserts@gmail.com?subject=Accessibility%20feedback" style="color:rgba(255,255,255,0.55);">Accessibility feedback</a></p>
 </footer>
 
 <!-- CHECKOUT MODAL -->
@@ -1325,6 +1339,7 @@
             <span class="flavor-unit-label">Unit ${i + 1}</span>
             <select class="flavor-select${drink ? '' : ' unset'}"
               id="flavor-${key}-${i}"
+              aria-label="Drink flavor for ${item.label}, unit ${i + 1}"
               onchange="saveFlavor('${key}',${i},this.value)">
               ${buildDrinkOptions(drink)}
             </select>
@@ -1361,15 +1376,15 @@
         if (chosenBoba) total += bobaCost;
 
         html += `<div style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px dashed rgba(37,164,221,0.3);">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#25a4dd;margin-bottom:0.35rem;">Boba Add-On (optional)</div>
-          <select style="width:100%;border:1.5px solid #e8e4df;border-radius:6px;padding:0.5rem 0.7rem;font-family:'Montserrat',sans-serif;font-size:0.78rem;color:#1a1a1a;background:#fff;outline:none;cursor:pointer;"
+          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#0e6e9e;margin-bottom:0.35rem;">Boba Add-On (optional)</div>
+          <select aria-label="Boba type for ${item.label}" style="width:100%;border:1.5px solid #e8e4df;border-radius:6px;padding:0.5rem 0.7rem;font-family:'Montserrat',sans-serif;font-size:0.78rem;color:#1a1a1a;background:#fff;outline:none;cursor:pointer;"
             onchange="saveBoba('${key}',this.value)">${bobaOptions}</select>
           ${chosenBoba
             ? `<div style="margin-top:0.45rem;">
-                <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#526288;margin-bottom:0.3rem;">Amount <span style="font-weight:400;color:#aaa;">(50g per cup recommended)</span></div>
-                <select style="width:100%;border:1.5px solid #25a4dd;border-radius:6px;padding:0.5rem 0.7rem;font-family:'Montserrat',sans-serif;font-size:0.78rem;color:#0e2558;font-weight:600;background:#fff;outline:none;cursor:pointer;"
+                <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#526288;margin-bottom:0.3rem;">Amount <span style="font-weight:400;color:#6b6b6b;">(50g per cup recommended)</span></div>
+                <select aria-label="Boba amount for ${item.label}" style="width:100%;border:1.5px solid #25a4dd;border-radius:6px;padding:0.5rem 0.7rem;font-family:'Montserrat',sans-serif;font-size:0.78rem;color:#0e2558;font-weight:600;background:#fff;outline:none;cursor:pointer;"
                   onchange="saveBobaGrams('${key}',this.value)">${bobaGramsOptions}</select>
-                <div style="font-size:0.7rem;color:#2d7da8;margin-top:0.3rem;">$0.75 per 50g scoop &nbsp;·&nbsp; <strong>+$${bobaCost.toFixed(2)}</strong> for ${curGrams.toLocaleString()}g</div>
+                <div style="font-size:0.7rem;color:#0e6e9e;margin-top:0.3rem;">$0.75 per 50g scoop &nbsp;·&nbsp; <strong>+$${bobaCost.toFixed(2)}</strong> for ${curGrams.toLocaleString()}g</div>
               </div>`
             : `<div style="font-size:0.7rem;color:#aaa;margin-top:0.3rem;">Select a boba type to see amount options</div>`
           }
@@ -1483,16 +1498,25 @@
     document.getElementById('modal-success-state').classList.remove('show');
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
+    lastFocused = document.activeElement;
+    setTimeout(() => { const n = document.getElementById('f-name'); if (n) n.focus(); }, 50);
   }
 
   function closeModal() {
     document.getElementById('modal-overlay').classList.remove('open');
     document.body.style.overflow = '';
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
   }
 
   function closeModalOutside(e) {
     if (e.target === document.getElementById('modal-overlay')) closeModal();
   }
+
+  /* modal keyboard: Escape closes; return focus to trigger (WCAG 2.1.2 / 2.4.7) */
+  let lastFocused = null;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('modal-overlay').classList.contains('open')) closeModal();
+  });
 
   function submitOrder() {
     const name  = document.getElementById('f-name').value.trim();
