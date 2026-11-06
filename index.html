@@ -176,6 +176,8 @@
 
     /* ─── WHAT'S NEW: seasonal + event "tickets" (filled from the sheet) ─── */
     .tickets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; list-style: none; }
+    /* Exactly 4 seasonal drinks → a centered 2×2 grid (any other count keeps rows of 3) */
+    .tickets[data-sheet="seasonal"]:has(> li:nth-child(4):last-child) { grid-template-columns: repeat(2, 1fr); max-width: 780px; margin: 0 auto; }
     .ticket { background: #fff; border-radius: 22px; padding: 1.6rem 1.5rem 1.4rem; position: relative; }
     .ticket::before { content: ""; position: absolute; left: 1.5rem; right: 1.5rem; top: 3.7rem; border-top: 2px dashed var(--line); }
     .tag { font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--navy); display: inline-block; padding: .35rem .7rem; border-radius: 999px; margin-bottom: 1.6rem; background: var(--sky-mist); }
@@ -314,6 +316,7 @@
       .circle { width: 170px; height: 170px; }
       .rail h3 { font-size: 1.02rem; }
       .tickets, .three, .reviews-grid { grid-template-columns: 1fr; }
+      .tickets[data-sheet="seasonal"]:has(> li:nth-child(4):last-child) { grid-template-columns: 1fr; }
       .reviews-panel { padding: 3rem 1.25rem; border-radius: 28px; }
       .visit-inner { grid-template-columns: 1fr; }
       .visit-card { padding: 2rem 1.5rem; }
@@ -387,7 +390,7 @@
   <ul class="rail" id="rail">
     <li data-reveal style="--d:0s"><a href="menu.html#milk-fruit"><div class="circle"><img src="milk-fruit-tea-boba-chesterfield.jpg" alt="Milk and fruit tea boba drinks at Sweet Tapioca Cafe Chesterfield" loading="lazy" width="230" height="230"></div><h3>Milk &amp; Fruit Teas</h3><span class="go">The classics</span></a></li>
     <li data-reveal style="--d:.08s"><a href="menu.html#coffees"><div class="circle"><img src="matcha-coffee-hot-drinks-chesterfield.jpg" alt="Cold coffees and matcha drinks at Sweet Tapioca Cafe Chesterfield" loading="lazy" width="230" height="230"></div><h3>Cold Coffees &amp; Matchas</h3><span class="go">Iced &amp; energizing</span></a></li>
-    <li data-reveal style="--d:.12s"><a href="menu.html#hot-drinks"><div class="circle"><img src="matcha-coffee-hot-drinks-chesterfield.jpg" alt="Hot drinks at Sweet Tapioca Cafe Chesterfield" loading="lazy" width="230" height="230"></div><h3>Hot Drinks</h3><span class="go">Warm-up picks</span></a></li>
+    <li data-reveal style="--d:.12s"><a href="menu.html#hot-drinks"><div class="circle"><img src="hot-drinks-chesterfield.png" alt="Hot drinks at Sweet Tapioca Cafe Chesterfield" loading="lazy" width="230" height="230"></div><h3>Hot Drinks</h3><span class="go">Warm-up picks</span></a></li>
     <li data-reveal style="--d:.18s"><a href="menu.html#sodas"><div class="circle"><img src="soda-creme-lemonade-boba.jpg" alt="Sodas cremes and lemonades at Sweet Tapioca Cafe Chesterfield" loading="lazy" width="230" height="230"></div><h3>Sodas, Cremes &amp; Lemonades</h3><span class="go">Bright &amp; bubbly</span></a></li>
     <li data-reveal style="--d:.24s"><a href="menu.html#smoothies"><div class="circle"><img src="smoothie-slush-boba-chesterfield.jpg" alt="Smoothies and slushes at Sweet Tapioca Cafe Chesterfield" loading="lazy" width="230" height="230"></div><h3>Smoothies &amp; Slushes</h3><span class="go">Blended cold</span></a></li>
     <li data-reveal style="--d:.32s"><a href="menu.html#desserts"><div class="circle"><img src="bingsu-macarons-desserts-chesterfield.jpg" alt="Bingsu macarons and desserts at Sweet Tapioca Cafe Chesterfield" loading="lazy" width="230" height="230"></div><h3>Desserts &amp; Snacks</h3><span class="go">Bingsu &amp; macarons</span></a></li>
@@ -404,10 +407,10 @@
       <p class="section-sub" data-sheet="season-dates">Nov 3 to Jan 10 only</p>
     </div>
     <ul class="tickets" data-sheet="seasonal">
-      <li class="ticket has-photo"><div class="photo" aria-hidden="true"></div><span class="tag">Hot or cold</span><h3>Tinsel &amp; Taro</h3><p>Chocolate peppermint, but make it taro</p></li>
-      <li class="ticket has-photo"><div class="photo" aria-hidden="true"></div><span class="tag">Matcha</span><h3>Merry Mule Matcha</h3><p>Pure cranberry juice, vanilla syrup &amp; real lime, topped with ginger beer &amp; ceremonial-grade matcha</p></li>
-      <li class="ticket has-photo"><div class="photo" aria-hidden="true"></div><span class="tag">Float</span><h3>Butter Brew Float</h3><p>Cream soda with caramel &amp; sweetened condensed milk, with your choice of butter pecan or gooey butter cake ice cream</p></li>
-      <li class="ticket has-photo"><div class="photo" aria-hidden="true"></div><span class="tag">Milk tea</span><h3>It's Giving Purple</h3><p>Ube foam, black milk tea &amp; toasted marshmallow syrup, topped with a layer of salted cream cheese foam brûlée</p></li>
+      <li class="ticket has-photo"><div class="photo"><img src="images/seasonal/tinsel-taro.jpg" alt="Tinsel &amp; Taro" loading="lazy" width="140" height="140"></div><span class="tag">Hot or cold</span><h3>Tinsel &amp; Taro</h3><p>Chocolate peppermint, but make it taro</p></li>
+      <li class="ticket has-photo"><div class="photo"><img src="images/seasonal/merry-mule-matcha.jpg" alt="Merry Mule Matcha" loading="lazy" width="140" height="140"></div><span class="tag">Matcha</span><h3>Merry Mule Matcha</h3><p>Pure cranberry juice, vanilla syrup &amp; real lime, topped with ginger beer &amp; ceremonial-grade matcha</p></li>
+      <li class="ticket has-photo"><div class="photo"><img src="images/seasonal/butter-brew-float.jpg" alt="Butter Brew Float" loading="lazy" width="140" height="140"></div><span class="tag">Float</span><h3>Butter Brew Float</h3><p>Cream soda with caramel &amp; sweetened condensed milk, with your choice of butter pecan or gooey butter cake ice cream</p></li>
+      <li class="ticket has-photo"><div class="photo"><img src="images/seasonal/its-giving-purple.jpg" alt="It's Giving Purple" loading="lazy" width="140" height="140"></div><span class="tag">Milk tea</span><h3>It's Giving Purple</h3><p>Ube foam, black milk tea &amp; toasted marshmallow syrup, topped with a layer of salted cream cheese foam brûlée</p></li>
     </ul>
 
     <h3 class="group-title" data-reveal>Upcoming events</h3>
