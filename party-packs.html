@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Party Packs — Sweet Tapioca Cafe | Bulk Boba Orders in Chesterfield, MO</title>
-  <meta name="description" content="Order boba tea in bulk for your party or event. Sweet Tapioca Cafe offers half-gallon, full-gallon, and large party pack sizes. Pick up in Chesterfield, MO."/>
+  <meta name="description" content="Order boba tea in bulk for your party or event. Sweet Tapioca Cafe offers half-gallon and full-gallon party packs. Pick up in Chesterfield, MO."/>
   <link rel="canonical" href="https://sweettapiocacafe.com/party-packs"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
   <meta name="theme-color" content="#0e2558">
   <!-- Open Graph -->
   <meta property="og:title" content="Party Packs — Sweet Tapioca Cafe">
-  <meta property="og:description" content="Order boba tea in bulk for your next party or event. Half-gallon, full-gallon, and large party sizes available for pick-up in Chesterfield, MO.">
+  <meta property="og:description" content="Order boba tea in bulk for your next party or event. Half-gallon and full-gallon sizes available for pick-up in Chesterfield, MO.">
   <meta property="og:image" content="https://sweettapiocacafe.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -28,7 +28,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Party Packs — Sweet Tapioca Cafe">
-  <meta name="twitter:description" content="Order boba tea in bulk for your next party or event. Half-gallon, full-gallon, and large party sizes available for pick-up in Chesterfield, MO.">
+  <meta name="twitter:description" content="Order boba tea in bulk for your next party or event. Half-gallon and full-gallon sizes available for pick-up in Chesterfield, MO.">
   <meta name="twitter:image" content="https://sweettapiocacafe.com/og-image.png">
 
   <script>
@@ -478,7 +478,7 @@
 <header class="hero page-hero" data-wash="cream">
   <p class="eyebrow">Party Packs &nbsp;·&nbsp; Bulk Boba Orders &nbsp;·&nbsp; Chesterfield, MO</p>
   <h1>Boba for the whole crew <em>—</em> in bulk.</h1>
-  <p class="hero-sub">Pick up a half-gallon for a small gathering or roll out a full 5-gallon jug for your big event. All your favorite Sweet Tapioca drinks, ready to go.</p>
+  <p class="hero-sub">Pick up a half gallon for a small gathering or a full gallon for a bigger crew. All your favorite Sweet Tapioca drinks, ready to go.</p>
   <div class="hero-ctas">
     <a href="#order-h" class="btn btn-navy">Build Your Order →</a>
     <a href="events.html" class="btn btn-white">Full Catering</a>
@@ -766,9 +766,14 @@
     <!-- SUCCESS STATE -->
     <div id="modal-success-state" class="modal-success">
       <div class="modal-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0e2558" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16.5 9.5" stroke="#25a4dd"/></svg></div>
-      <h3>Order Request Sent!</h3>
-      <p>We received your order and will email you a payment invoice within 72 hours. If you have questions, call us at <a href="tel:+16367781212" style="color:#0e6e9e;font-weight:700;">(636) 778-1212</a>.</p>
-      <button class="modal-submit-btn" onclick="closeModal()">Close</button>
+      <!-- The request is NOT sent until the customer presses Submit on the Google Form, so this state says so
+           and offers a link to the same pre-filled form in case the new tab was blocked or closed. -->
+      <h3>Almost done: press Submit</h3>
+      <p>Your order opened in a new tab as a Google Form, already filled in. <strong>Press Submit on that form to send it to us.</strong> We'll then email you a payment invoice within 72 hours.</p>
+      <p>Tab didn't open, or closed it by mistake?</p>
+      <a class="modal-submit-btn" id="order-form-link" href="#" target="_blank" rel="noopener">Open my order form →</a>
+      <p>Questions? Call us at <a href="tel:+16367781212" style="color:#0e6e9e;font-weight:700;">(636) 778-1212</a>.</p>
+      <button class="cart-checkout-btn" style="background:#fff;color:#0e2558;border:1.5px solid rgba(14,37,88,.3);box-shadow:none;" onclick="closeModal()">Close</button>
     </div>
   </div>
 </div>
@@ -1241,10 +1246,14 @@
       + `&${ENTRY_DATE}=${encodeURIComponent(date)}`
       + `&${ENTRY_ORDER}=${encodeURIComponent(orderStr)}`;
 
+    /* Backup link to the same pre-filled form (the new tab can be blocked or closed) */
+    document.getElementById('order-form-link').href = formUrl;
+
     window.open(formUrl, '_blank');
 
     document.getElementById('modal-form-state').style.display = 'none';
     document.getElementById('modal-success-state').classList.add('show');
+    setTimeout(() => { const l = document.getElementById('order-form-link'); if (l) l.focus(); }, 50);
   }
 </script>
 
