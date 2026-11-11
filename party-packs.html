@@ -368,6 +368,26 @@
     .modal-success h3 { padding-right: 0; }
     .modal-success p { font-size: .84rem; color: var(--ink); line-height: 1.7; }
 
+    /* ─── THANKSGIVING PROMO (Nov 2026) — hidden by default, shown by the PROMO script only until the cutoff.
+       To remove: delete this CSS block, the #promo-strip section, the #promo-cart label, and the PROMO script block. ─── */
+    .promo-strip { padding: 0 2rem 1.5rem; }
+    .promo-card { position: relative; overflow: hidden; max-width: 940px; margin: 0 auto; background: var(--navy); border-radius: 28px; padding: 1.75rem 2.1rem; display: flex; align-items: center; gap: 1.75rem; box-shadow: 0 18px 40px rgba(14,37,88,.18); }
+    .promo-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(500px 300px at 0% -20%, rgba(37,164,221,.35), transparent 60%); }
+    .promo-card > * { position: relative; }
+    .promo-pct { flex-shrink: 0; text-align: center; font-family: var(--title); font-weight: 800; color: var(--sky); line-height: .9; font-size: 3.6rem; letter-spacing: -.03em; }
+    .promo-pct small { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #fff; margin-top: .35rem; }
+    .promo-kicker { font-family: var(--serif); font-style: italic; font-size: 1rem; color: rgba(255,255,255,.88); margin-bottom: .2rem; }
+    .promo-text h2 { font-family: var(--title); font-size: 1.45rem; font-weight: 800; color: #fff; letter-spacing: -.01em; line-height: 1.15; margin-bottom: .5rem; }
+    .promo-text p:not(.promo-kicker) { font-size: .82rem; color: rgba(255,255,255,.9); line-height: 1.7; }
+    .promo-text a { display: inline-block; margin-top: .6rem; color: #fff; font-size: .74rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .promo-text a:focus-visible { box-shadow: 0 0 0 2px var(--navy), 0 0 0 4px #fff; }
+    .cart-promo { background: var(--sky-mist); border: 1.5px solid var(--sky-text); }
+    @media (max-width: 820px) {
+      .promo-strip { padding: 0 1rem 1rem; }
+      .promo-card { flex-direction: column; align-items: flex-start; gap: .9rem; padding: 1.5rem 1.4rem; border-radius: 22px; }
+      .promo-pct { font-size: 2.8rem; text-align: left; }
+    }
+
     /* Back-to-top button */
     #scroll-top { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 46px; height: 46px; background: var(--navy); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(14,37,88,.25); opacity: 0; pointer-events: none; transition: opacity .25s ease, background .18s; z-index: 500; }
     #scroll-top svg { width: 18px; height: 18px; }
@@ -466,6 +486,23 @@
   <p class="hero-note">* Serving estimates are based on 16 oz drinks (including ice).</p>
 </header>
 
+<!-- ═══ THANKSGIVING PARTY PACKS PROMO (Nov 2026) ═══
+     Terms confirmed by the owner Nov 11, 2026: 26% off drinks (half and full gallons) only; boba, cups, lids,
+     straws and cooler rental at regular price; pickup Tue Nov 24 or Wed Nov 25 only; requests close
+     Sun Nov 22 at midnight Central (owner waived the usual 72 hours for the Tuesday pickup);
+     $40 minimum checked before the discount. Hidden by default: the PROMO script shows it only until the cutoff. -->
+<section class="promo-strip" id="promo-strip" aria-labelledby="promo-h" hidden>
+  <div class="promo-card">
+    <div class="promo-pct" aria-hidden="true">26%<small>off drinks</small></div>
+    <div class="promo-text">
+      <p class="promo-kicker">Thanksgiving &amp; Friendsgiving</p>
+      <h2 id="promo-h">26% off Party Pack drinks for 2026</h2>
+      <p>Pick up Tuesday, Nov 24 or Wednesday, Nov 25. Order by Sunday, Nov 22 at midnight. Tick &ldquo;Thanksgiving pickup&rdquo; in your order and the discount shows in your total. Applies to half and full gallons; boba, cups, lids, straws and cooler rental are regular price. $40 minimum before the discount. We're closed Thanksgiving Day.</p>
+      <a href="#order-h">Build your order</a>
+    </div>
+  </div>
+</section>
+
 <!-- INTRO -->
 <section class="section" data-wash="sky-mist" aria-labelledby="intro-h">
   <div class="wrap">
@@ -541,6 +578,13 @@
         <input type="checkbox" id="cooler-check" onchange="updateCart()">
         <span class="cart-cooler-label">Add Igloo Cooler Rental (on wheels)</span>
         <span class="cart-cooler-price">+$25/day</span>
+      </label>
+
+      <!-- THANKSGIVING PROMO (Nov 2026): shown by the PROMO script until the cutoff -->
+      <label class="cart-cooler cart-promo" for="promo-check" id="promo-cart" hidden>
+        <input type="checkbox" id="promo-check" onchange="updateCart(); syncPromoDate();">
+        <span class="cart-cooler-label">Thanksgiving pickup, Tue Nov 24 or Wed Nov 25: 26% off drinks</span>
+        <span class="cart-cooler-price" id="promo-save"></span>
       </label>
 
       <div id="cart-min-warning" style="display:none;background:#ebe6de;border:1.5px solid #6e6350;border-radius:14px;padding:0.65rem 0.9rem;font-size:0.75rem;font-weight:600;color:#0e2558;">
@@ -801,6 +845,56 @@
   const SUPPLIES   = { cups: 0.50, lids: 0.25, straws: 0.25 };
   const supplyQty  = { cups: 0, lids: 0, straws: 0 };
 
+  /* ── THANKSGIVING PROMO (Nov 2026) ──
+     26% off drinks only (half/full gallons; not boba, supplies or cooler); pickup Nov 24 or 25 only;
+     closes Sun Nov 22 at midnight Central. The $40 minimum still uses the pre-discount drink total.
+     After the cutoff every promo element stays hidden and nothing below changes a price.
+     To remove for good: set PROMO = null (or delete this block plus the promo markup/CSS). */
+  const PROMO = {
+    label:  'Thanksgiving 26% off drinks',
+    rate:   0.26,
+    cutoff: new Date('2026-11-23T00:00:00-06:00'),   /* = Sun Nov 22, midnight Central */
+    dates:  ['2026-11-24', '2026-11-25']
+  };
+  const DATE_MIN_DEFAULT = document.getElementById('f-date').min;
+
+  function promoOpen() { return !!PROMO && Date.now() < PROMO.cutoff.getTime(); }
+  function promoOn() {
+    const c = document.getElementById('promo-check');
+    return promoOpen() && !!c && c.checked;
+  }
+  function drinksSubtotal() {
+    return Object.keys(ITEMS).reduce((s, k) => s + flavors[k].reduce((a, d) => a + unitPrice(k, d), 0), 0);
+  }
+  function promoAmount(drinks) { return Math.round(drinks * PROMO.rate * 100) / 100; }
+  function promoDiscount(drinks) { return promoOn() ? promoAmount(drinks) : 0; }
+
+  /* With the box ticked, the pick-up date may only be Nov 24 or 25 (owner waived the 72 hours for Tuesday). */
+  function syncPromoDate() {
+    const f = document.getElementById('f-date');
+    if (promoOn()) { f.min = PROMO.dates[0]; f.max = PROMO.dates[PROMO.dates.length - 1]; }
+    else { f.min = DATE_MIN_DEFAULT; f.removeAttribute('max'); }
+  }
+
+  /* Picking Nov 24 or 25 in the request form ticks the promo box, so the customer gets it either way. */
+  function promoDatePicked() {
+    if (!promoOpen()) return;
+    const c = document.getElementById('promo-check');
+    const date = document.getElementById('f-date').value;
+    if (c && !c.checked && PROMO.dates.includes(date)) {
+      c.checked = true;
+      updateCart();
+      syncPromoDate();
+      document.getElementById('modal-recap').innerHTML = buildRecap();
+    }
+  }
+
+  if (promoOpen()) {
+    document.getElementById('promo-strip').hidden = false;
+    document.getElementById('promo-cart').hidden = false;
+    document.getElementById('f-date').addEventListener('change', promoDatePicked);
+  }
+
   /* Price for a single unit given drink selection */
   function unitPrice(key, drink) {
     if (drink && DRINK_PRICES[drink]) return DRINK_PRICES[drink][key];
@@ -956,6 +1050,19 @@
       }
     }
 
+    /* Thanksgiving promo (Nov 2026): 26% off the drinks subtotal only */
+    if (promoOpen()) {
+      const saveEl = document.getElementById('promo-save');
+      if (saveEl) saveEl.textContent = itemsTotal > 0 ? '−$' + promoAmount(itemsTotal).toFixed(2) : '';
+      const promoOff = promoDiscount(itemsTotal);
+      if (promoOff > 0) {
+        total -= promoOff;
+        html += `<div class="cart-line" style="margin-top:0.25rem;">
+          <span>${PROMO.label} (pickup Nov 24 or 25)</span><span>−$${promoOff.toFixed(2)}</span>
+        </div>`;
+      }
+    }
+
     linesEl.innerHTML = html;
     totalEl.textContent = '$' + total.toFixed(2);
     summary.classList.toggle('visible', hasItems || cooler);
@@ -1000,6 +1107,10 @@
         parts.push(`${supplyQty[key]}× ${label} ($${(supplyQty[key]*price).toFixed(2)})`);
       }
     }
+    if (promoOn()) {
+      const d = drinksSubtotal();
+      parts.push(`PROMO: ${PROMO.label}, pickup Nov 24/25 only (-$${promoDiscount(d).toFixed(2)} off $${d.toFixed(2)} drinks; TOTAL below is after discount)`);
+    }
     return parts.join(' || ');
   }
 
@@ -1024,6 +1135,10 @@
         const label = key === 'cups' ? '16 oz Cups' : key === 'lids' ? 'Cup Lids' : 'Straws';
         lines.push(`<strong>${supplyQty[key]}× ${label} — $${(supplyQty[key]*price).toFixed(2)}</strong>`);
       }
+    }
+    if (promoOn()) {
+      lines.push(`<strong>${PROMO.label} — −$${promoDiscount(drinksSubtotal()).toFixed(2)}</strong> (pickup Tue Nov 24 or Wed Nov 25)`);
+      lines.push(`<strong>Estimated total — ${document.getElementById('cart-total').textContent}</strong>`);
     }
     return lines.join('<br>');
   }
@@ -1072,6 +1187,21 @@
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       alert('Please enter a valid email address so we can send your invoice.');
+      return;
+    }
+
+    /* Thanksgiving promo (Nov 2026) checks — added after, and separate from, the required-field checks above */
+    const promoBox = document.getElementById('promo-check');
+    if (promoBox && promoBox.checked && !promoOpen()) {
+      promoBox.checked = false;
+      updateCart();
+      syncPromoDate();
+      closeModal();
+      alert('Thanksgiving ordering closed Sunday, Nov 22 at midnight, so the 26% off no longer applies. Your total has been updated; please review it and send your request again.');
+      return;
+    }
+    if (promoOn() && !PROMO.dates.includes(date)) {
+      alert('The Thanksgiving 26% off is for pick-up on Tuesday, Nov 24 or Wednesday, Nov 25. Choose one of those dates, or untick "Thanksgiving pickup" in your order to pick another day.');
       return;
     }
 
