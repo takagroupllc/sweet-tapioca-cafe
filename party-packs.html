@@ -311,6 +311,7 @@
     .flavor-group { display: flex; flex-direction: column; gap: .55rem; padding: .85rem 0 .85rem .9rem; border-left: 3px solid var(--sky); margin-top: .25rem; }
     .flavor-group-label { font-size: .64rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--navy); }
     .flavor-row { display: flex; align-items: center; gap: .6rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     .flavor-unit-label { font-size: .74rem; color: var(--muted); font-weight: 600; min-width: 3.5rem; flex-shrink: 0; }
     .flavor-select { flex: 1; min-width: 0; border: 1.5px solid var(--line); border-radius: 12px; padding: .55rem .75rem; font-family: var(--body); font-size: .8rem; color: var(--ink); background: #fff; cursor: pointer; transition: border-color .15s; appearance: auto; }
     .flavor-select:focus { border-color: var(--sky-text); }
@@ -569,9 +570,10 @@
     <div class="cart-summary" id="cart-summary">
       <h3>Your Order</h3>
       <div id="cart-lines"></div>
+      <p id="boba-status" class="sr-only" aria-live="polite"></p>
 
       <div style="background:#d6edf8;border:1px solid #25a4dd;border-radius:10px;padding:0.75rem 1rem;font-size:0.75rem;color:#0e6e9e;line-height:1.6;">
-        <strong>Boba add-on:</strong> Select a boba type per size above — we recommend <strong>50g per cup</strong>. Amounts are calculated automatically.
+        <strong>Boba add-on:</strong> Select a boba type per size above — we recommend <strong>50g per cup</strong>. Want more than one? Tap &ldquo;+ Add another boba&rdquo; (up to 3 per size) and choose which gallon each one goes with. Amounts are calculated automatically.
       </div>
 
       <label class="cart-cooler" for="cooler-check">
@@ -790,10 +792,10 @@
 
   /* ── DRINK MENU ── */
   const DRINKS = [
-    'Classic Black Milk Tea','Classic Jasmine Milk Tea','Classic Oolong Milk Tea',
+    'Classic Black Milk Tea','Classic Jasmine Milk Tea',
     'Okinawa Milk Tea','Wintermelon Milk Tea','Sakura Rose Milk Tea','Strawberry Milk Tea',
     'Ube Royale Milk Tea','Hokkaido Milk Tea','Coconut Milk Tea','Mango Milk Tea','Thai Milk Tea','Taro Milk Tea',
-    'Oreo Milk Tea','Tiramisu Milk Tea','Caramel Biscoff Milk Tea','Coffee Milk Tea',
+    'Oreo Milk Tea','Tiramisu Milk Tea','Caramel Biscoff Milk Tea',
     'Raspberry Strawberry Fruit Tea','Lychee Passionfruit Fruit Tea','Pineapple Mango Fruit Tea',
     'Peachy Lychee Fruit Tea','Lychee Rose Fruit Tea','Peachy Rose Fruit Tea',
     'Ube Coffee','Viet Coffee','Pandan Coffee','Classic Matcha'
@@ -803,7 +805,6 @@
   const DRINK_PRICES = {
     'Classic Black Milk Tea':        { half: 25, full: 40 },
     'Classic Jasmine Milk Tea':      { half: 25, full: 40 },
-    'Classic Oolong Milk Tea':       { half: 25, full: 40 },
     'Okinawa Milk Tea':              { half: 30, full: 50 },
     'Wintermelon Milk Tea':          { half: 25, full: 40 },
     'Sakura Rose Milk Tea':          { half: 25, full: 40 },
@@ -817,7 +818,6 @@
     'Oreo Milk Tea':                 { half: 25, full: 40 },
     'Tiramisu Milk Tea':             { half: 25, full: 40 },
     'Caramel Biscoff Milk Tea':      { half: 25, full: 40 },
-    'Coffee Milk Tea':               { half: 25, full: 40 },
     'Raspberry Strawberry Fruit Tea':{ half: 25, full: 40 },
     'Lychee Passionfruit Fruit Tea': { half: 25, full: 40 },
     'Pineapple Mango Fruit Tea':     { half: 25, full: 40 },
@@ -842,10 +842,18 @@
 
   const qty        = { half: 0, full: 0 };
   const flavors    = { half: [], full: [] };
-  const bobaChoice = { half: '', full: '' };
-  const bobaGrams  = { half: 250, full: 500 };   /* default amounts, only used when boba type chosen */
+  /* Boba: each size can carry up to 3 boba rows (owner, Nov 15 2026). Every row has its own type,
+     amount (same choices as before: half 250/500g, full 500/1000g) and target: 'all' = shared by
+     every gallon of that size, or a unit index (0 = Unit 1). Priced per row at $0.75 per 50g.
+     Boba is never part of the drinks subtotal, so it never counts toward the $40 minimum or the promo. */
   const BOBA_OPTS  = { half: [250, 500], full: [500, 1000] };
   const BOBA_PRICE_PER_50G = 0.75;
+  const MAX_BOBA_ROWS = 3;
+  const BOBA_TYPES = ['Rainbow Jelly','Lychee Jelly','Mango Star Jelly',
+    'Strawberry Popping Boba','Mango Popping Boba','Lychee Popping Boba',
+    'Peach Popping Boba','Pomegranate Popping Boba','Lychee Crystal Boba'];
+  function newBobaRow(key) { return { type: '', grams: BOBA_OPTS[key][0], unit: 'all' }; }
+  const bobaRows = { half: [newBobaRow('half')], full: [newBobaRow('full')] };
   const CUPS_PER_UNIT = { half: 5, full: 10 };
   const SUPPLIES   = { cups: 0.50, lids: 0.25, straws: 0.25 };
   const supplyQty  = { cups: 0, lids: 0, straws: 0 };
@@ -906,19 +914,69 @@
     return BASE_PRICE[key];
   }
 
-  function saveBoba(key, value) {
-    bobaChoice[key] = value;
+  /* The cart re-renders on every change, so put keyboard focus back where the customer was. */
+  function refocus(id) { const el = document.getElementById(id); if (el) el.focus(); }
+  function announceBoba(msg) { const s = document.getElementById('boba-status'); if (s) s.textContent = msg; }
+
+  function saveBoba(key, i, value) {
+    bobaRows[key][i].type = value;
     updateCart();
+    refocus(`boba-type-${key}-${i}`);
   }
 
-  function saveBobaGrams(key, grams) {
-    bobaGrams[key] = parseInt(grams, 10);
+  function saveBobaGrams(key, i, grams) {
+    bobaRows[key][i].grams = parseInt(grams, 10);
     updateCart();
+    refocus(`boba-grams-${key}-${i}`);
   }
 
-  function bobaPrice(key) {
-    if (!bobaChoice[key]) return 0;
-    return (bobaGrams[key] / 50) * BOBA_PRICE_PER_50G;
+  function saveBobaUnit(key, i, unit) {
+    bobaRows[key][i].unit = unit === 'all' ? 'all' : parseInt(unit, 10);
+    updateCart();
+    refocus(`boba-unit-${key}-${i}`);
+  }
+
+  function addBobaRow(key) {
+    if (bobaRows[key].length >= MAX_BOBA_ROWS) return;
+    bobaRows[key].push(newBobaRow(key));
+    updateCart();
+    const n = bobaRows[key].length;
+    refocus(`boba-type-${key}-${n - 1}`);
+    announceBoba(`Boba ${n} added for ${ITEMS[key].label}. Choose a boba type.`);
+  }
+
+  function removeBobaRow(key, i) {
+    bobaRows[key].splice(i, 1);
+    if (!bobaRows[key].length) bobaRows[key].push(newBobaRow(key));
+    updateCart();
+    refocus(`boba-type-${key}-${Math.max(0, i - 1)}`);
+    announceBoba(`Boba ${i + 1} removed from ${ITEMS[key].label}.`);
+  }
+
+  function bobaRowPrice(row) {
+    return row.type ? (row.grams / 50) * BOBA_PRICE_PER_50G : 0;
+  }
+  function bobaTotal(key) {
+    return bobaRows[key].reduce((s, r) => s + bobaRowPrice(r), 0);
+  }
+  /* Rows with a boba type picked, in order: these are what get priced and sent. */
+  function filledBoba(key) { return bobaRows[key].filter(r => r.type); }
+  /* Which gallon a row goes with, for the order text ('' when there is only one gallon of that size). */
+  function bobaTarget(key, row) {
+    if (qty[key] <= 1) return '';
+    if (row.unit === 'all') return `all ${qty[key]} ${ITEMS[key].label}s (shared)`;
+    const drink = flavors[key][row.unit];
+    return `Unit ${row.unit + 1}${drink ? ' ' + drink : ''}`;
+  }
+  /* One line per boba for the order string / recap. Single boba keeps the old "Boba:" wording. */
+  function bobaLines(key) {
+    const rows = filledBoba(key);
+    return rows.map((r, n) => {
+      const name = rows.length > 1 ? `Boba ${n + 1}` : 'Boba';
+      const target = bobaTarget(key, r);
+      return { name, type: r.type, grams: r.grams.toLocaleString() + 'g',
+               price: bobaRowPrice(r).toFixed(2), target };
+    });
   }
 
   function changeSupply(key, add) {
@@ -934,6 +992,8 @@
     } else if (qty[key] > 0) {
       qty[key]--;
       flavors[key].pop();
+      /* a boba aimed at a gallon that no longer exists goes back to shared */
+      bobaRows[key].forEach(r => { if (r.unit !== 'all' && r.unit >= qty[key]) r.unit = 'all'; });
     }
     document.getElementById('qty-' + key).textContent = qty[key];
     updateCart();
@@ -995,41 +1055,63 @@
           <span style="font-weight:700;color:#0e2558;">$${groupTotal}</span>
         </div>`;
 
-        /* Boba selector */
-        const chosenBoba = bobaChoice[key];
-        const bobaOptions = '<option value="">— No boba (optional) —</option>'
-          + ['Rainbow Jelly','Lychee Jelly','Mango Star Jelly',
-             'Strawberry Popping Boba','Mango Popping Boba','Lychee Popping Boba',
-             'Peach Popping Boba','Pomegranate Popping Boba','Lychee Crystal Boba',
-             'Cherry Blossom Crystal Boba']
-            .map(d => `<option value="${d}"${d === chosenBoba ? ' selected' : ''}>${d}</option>`)
-            .join('');
-
-        /* Boba grams dropdown (only shown when type is selected) */
-        const curGrams = bobaGrams[key];
-        const bobaGramsOptions = BOBA_OPTS[key]
-          .map(g => {
-            const bPrice = ((g / 50) * BOBA_PRICE_PER_50G).toFixed(2);
-            return `<option value="${g}"${g === curGrams ? ' selected' : ''}>${g.toLocaleString()}g — $${bPrice}</option>`;
-          }).join('');
-        const bobaCost = bobaPrice(key);
-
-        if (chosenBoba) total += bobaCost;
+        /* Boba selectors: one row per boba (up to MAX_BOBA_ROWS), each with type, amount and which gallon */
+        total += bobaTotal(key);
+        const rows = bobaRows[key];
+        const selStyle = "width:100%;border:1.5px solid #e8e4df;border-radius:6px;padding:0.5rem 0.7rem;font-family:'Montserrat',sans-serif;font-size:0.78rem;color:#1a1a1a;background:#fff;outline:none;cursor:pointer;";
+        const subLabel = "font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#526288;margin-bottom:0.3rem;";
 
         html += `<div style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px dashed rgba(37,164,221,0.3);">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#0e6e9e;margin-bottom:0.35rem;">Boba Add-On (optional)</div>
-          <select aria-label="Boba type for ${item.label}" style="width:100%;border:1.5px solid #e8e4df;border-radius:6px;padding:0.5rem 0.7rem;font-family:'Montserrat',sans-serif;font-size:0.78rem;color:#1a1a1a;background:#fff;outline:none;cursor:pointer;"
-            onchange="saveBoba('${key}',this.value)">${bobaOptions}</select>
-          ${chosenBoba
-            ? `<div style="margin-top:0.45rem;">
-                <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#526288;margin-bottom:0.3rem;">Amount <span style="font-weight:400;color:#6b6b6b;">(50g per cup recommended)</span></div>
-                <select aria-label="Boba amount for ${item.label}" style="width:100%;border:1.5px solid #25a4dd;border-radius:6px;padding:0.5rem 0.7rem;font-family:'Montserrat',sans-serif;font-size:0.78rem;color:#0e2558;font-weight:600;background:#fff;outline:none;cursor:pointer;"
-                  onchange="saveBobaGrams('${key}',this.value)">${bobaGramsOptions}</select>
-                <div style="font-size:0.7rem;color:#0e6e9e;margin-top:0.3rem;">$0.75 per 50g scoop &nbsp;·&nbsp; <strong>+$${bobaCost.toFixed(2)}</strong> for ${curGrams.toLocaleString()}g</div>
-              </div>`
-            : `<div style="font-size:0.7rem;color:#aaa;margin-top:0.3rem;">Select a boba type to see amount options</div>`
+          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#0e6e9e;margin-bottom:0.35rem;">Boba Add-On (optional)</div>`;
+
+        rows.forEach((row, i) => {
+          const n = i + 1;
+          const many = rows.length > 1;
+          const typeOptions = `<option value="">— No boba${many ? '' : ' (optional)'} —</option>`
+            + BOBA_TYPES.map(d => `<option value="${d}"${d === row.type ? ' selected' : ''}>${d}</option>`).join('');
+          const gramsOptions = BOBA_OPTS[key].map(g => {
+            const bPrice = ((g / 50) * BOBA_PRICE_PER_50G).toFixed(2);
+            return `<option value="${g}"${g === row.grams ? ' selected' : ''}>${g.toLocaleString()}g — $${bPrice}</option>`;
+          }).join('');
+          let unitOptions = `<option value="all"${row.unit === 'all' ? ' selected' : ''}>All ${qty[key]} ${item.label}s (shared)</option>`;
+          for (let u = 0; u < qty[key]; u++) {
+            const d = flavors[key][u];
+            unitOptions += `<option value="${u}"${row.unit === u ? ' selected' : ''}>Unit ${u + 1}${d ? ': ' + d : ''}</option>`;
           }
-        </div>`;
+
+          html += `<div style="${i > 0 ? 'margin-top:0.7rem;padding-top:0.6rem;border-top:1px solid #e8e4df;' : ''}">`;
+          if (many) {
+            html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem;">
+              <span style="${subLabel}margin-bottom:0;">Boba ${n}</span>
+              <button type="button" onclick="removeBobaRow('${key}',${i})" aria-label="Remove boba ${n} from ${item.label}"
+                style="background:none;border:none;padding:0.3rem 0.2rem;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:600;color:#526288;text-decoration:underline;cursor:pointer;">Remove</button>
+            </div>`;
+          }
+          html += `<select id="boba-type-${key}-${i}" aria-label="Boba ${many ? n + ' ' : ''}type for ${item.label}" style="${selStyle}"
+              onchange="saveBoba('${key}',${i},this.value)">${typeOptions}</select>`;
+          if (row.type) {
+            html += `<div style="margin-top:0.45rem;">
+                <div style="${subLabel}">Amount <span style="font-weight:400;color:#6b6b6b;">(50g per cup recommended)</span></div>
+                <select id="boba-grams-${key}-${i}" aria-label="Boba ${many ? n + ' ' : ''}amount for ${item.label}" style="${selStyle}border-color:#25a4dd;color:#0e2558;font-weight:600;"
+                  onchange="saveBobaGrams('${key}',${i},this.value)">${gramsOptions}</select>`;
+            if (qty[key] > 1) {
+              html += `<div style="${subLabel}margin-top:0.45rem;">For</div>
+                <select id="boba-unit-${key}-${i}" aria-label="Which ${item.label} gets boba${many ? ' ' + n : ''}" style="${selStyle}"
+                  onchange="saveBobaUnit('${key}',${i},this.value)">${unitOptions}</select>`;
+            }
+            html += `<div style="font-size:0.7rem;color:#0e6e9e;margin-top:0.3rem;">$0.75 per 50g scoop &nbsp;·&nbsp; <strong>+$${bobaRowPrice(row).toFixed(2)}</strong> for ${row.grams.toLocaleString()}g</div>
+              </div>`;
+          } else if (!many) {
+            html += `<div style="font-size:0.7rem;color:#6b6b6b;margin-top:0.3rem;">Select a boba type to see amount options</div>`;
+          }
+          html += `</div>`;
+        });
+
+        if (rows.length < MAX_BOBA_ROWS && rows.every(r => r.type)) {
+          html += `<button type="button" id="boba-add-${key}" onclick="addBobaRow('${key}')" aria-label="Add another boba to ${item.label}"
+            style="margin-top:0.6rem;background:#fff;border:1.5px dashed #0e6e9e;border-radius:999px;padding:0.45rem 0.9rem;font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;color:#0e6e9e;cursor:pointer;">+ Add another boba</button>`;
+        }
+        html += `</div>`;
 
         html += `</div>`;
       }
@@ -1097,11 +1179,11 @@
     for (const [key, item] of Object.entries(ITEMS)) {
       if (qty[key] > 0) {
         const flavorList = flavors[key].map((f, i) => `Unit ${i+1}: ${f || 'TBD'}`).join(', ');
-        const bobaStr = bobaChoice[key]
-          ? ` | Boba: ${bobaChoice[key]} (${bobaGrams[key].toLocaleString()}g, $${bobaPrice(key).toFixed(2)})`
-          : '';
+        const bobaStr = bobaLines(key)
+          .map(b => ` | ${b.name}: ${b.type} (${b.grams}, $${b.price}${b.target ? ', for ' + b.target : ''})`)
+          .join('');
         const groupTotal = flavors[key].reduce((sum, drink) => sum + unitPrice(key, drink), 0);
-        const lineTotal = groupTotal + (bobaChoice[key] ? bobaPrice(key) : 0);
+        const lineTotal = groupTotal + bobaTotal(key);
         parts.push(`${qty[key]}× ${item.label} ($${lineTotal.toFixed(2)}) [${flavorList}]${bobaStr}`);
       }
     }
@@ -1129,9 +1211,9 @@
         flavors[key].forEach((f, i) => {
           lines.push(`&nbsp;&nbsp;Unit ${i+1}: ${f || '<em>No flavor selected</em>'}`);
         });
-        if (bobaChoice[key]) {
-          lines.push(`&nbsp;&nbsp;Boba: ${bobaChoice[key]} — ${bobaGrams[key].toLocaleString()}g (+$${bobaPrice(key).toFixed(2)})`);
-        }
+        bobaLines(key).forEach(b => {
+          lines.push(`&nbsp;&nbsp;${b.name}: ${b.type} — ${b.grams} (+$${b.price})${b.target ? ', for ' + b.target : ''}`);
+        });
       }
     }
     if (cooler) lines.push('<strong>Igloo Cooler Rental — $25/day</strong>');
