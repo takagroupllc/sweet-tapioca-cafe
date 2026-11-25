@@ -362,6 +362,10 @@
     .field-group input { border: 1.5px solid rgba(14,37,88,.2); border-radius: 12px; padding: .75rem .9rem; font-family: var(--body); font-size: .88rem; color: var(--ink); background: #fff; transition: border-color .15s; }
     .field-group input:focus { border-color: var(--sky-text); }
     .modal-note { font-size: .7rem; color: var(--muted); line-height: 1.65; text-align: center; }
+    .order-send-error { background: var(--sand-mist); border: 1.5px solid var(--sand-text); border-radius: 14px; padding: .75rem .9rem; font-size: .8rem; line-height: 1.6; color: var(--navy); }
+    .order-send-error a { color: var(--navy); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+    #order-sent-h:focus { outline: none; }
+    .modal-submit-btn:disabled { opacity: .6; cursor: wait; transform: none; }
     .modal-success { display: none; text-align: center; gap: 1rem; flex-direction: column; align-items: center; }
     .modal-success.show { display: flex; }
     .modal-success-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--sky-mist); display: flex; align-items: center; justify-content: center; }
@@ -761,19 +765,17 @@
           })();
         </script>
       </div>
-      <button class="modal-submit-btn" onclick="submitOrder()">Send Order Request →</button>
+      <p class="order-send-error" id="order-send-error" role="alert" tabindex="-1" hidden>We couldn't send your request. Please check your internet connection and try again, or call us at <a href="tel:+16367781212">(636) 778-1212</a>. You can also <a id="order-fallback-link" href="#" target="_blank" rel="noopener">send it with a Google Form instead</a>.</p>
+      <button class="modal-submit-btn" id="send-order-btn" onclick="submitOrder()">Send Order Request →</button>
       <p class="modal-note">We'll review your request and send a Clover invoice to your email within 72 hours to confirm and collect payment. Please place orders at least 72 hours before pick-up.</p>
     </div>
 
     <!-- SUCCESS STATE -->
     <div id="modal-success-state" class="modal-success">
       <div class="modal-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0e2558" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16.5 9.5" stroke="#25a4dd"/></svg></div>
-      <!-- The request is NOT sent until the customer presses Submit on the Google Form, so this state says so
-           and offers a link to the same pre-filled form in case the new tab was blocked or closed. -->
-      <h3>Almost done: press Submit</h3>
-      <p>Your order opened in a new tab as a Google Form, already filled in. <strong>Press Submit on that form to send it to us.</strong> We'll then email you a payment invoice within 72 hours.</p>
-      <p>Tab didn't open, or closed it by mistake?</p>
-      <a class="modal-submit-btn" id="order-form-link" href="#" target="_blank" rel="noopener">Open my order form →</a>
+      <!-- Shown only after the request has been posted to the Google Form (direct submit, Nov 2026). -->
+      <h3 id="order-sent-h" tabindex="-1">Order Request Sent!</h3>
+      <p>Thanks! We received your Party Pack request and will email you a Clover invoice within 72 hours to confirm your order.</p>
       <p>Questions? Call us at <a href="tel:+16367781212" style="color:#0e6e9e;font-weight:700;">(636) 778-1212</a>.</p>
       <button class="cart-checkout-btn" style="background:#fff;color:#0e2558;border:1.5px solid rgba(14,37,88,.3);box-shadow:none;" onclick="closeModal()">Close</button>
     </div>
@@ -1240,6 +1242,7 @@
     document.getElementById('modal-recap').innerHTML = buildRecap();
     document.getElementById('modal-form-state').style.display = '';
     document.getElementById('modal-success-state').classList.remove('show');
+    document.getElementById('order-send-error').hidden = true;
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
     lastFocused = document.activeElement;
@@ -1321,21 +1324,45 @@
        dedicated Email field to the Google Form, also wire an ENTRY_EMAIL below */
     const orderStr = 'EMAIL: ' + email + ' || ' + buildOrderString() + ' | TOTAL: ' + total;
 
-    const formUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url`
-      + `&${ENTRY_NAME}=${encodeURIComponent(name)}`
+    /* ── DIRECT SUBMIT (Nov 2026) ──
+       The request is posted straight to the same Google Form in the background (no new tab), so it
+       lands in the form's Responses / linked sheet / notifications exactly as before.
+       Google doesn't let the page read its reply ('no-cors'), so success = the request was delivered;
+       the catch below only fires on a real network failure. Keep the Google Form OPEN and keep its
+       questions as plain short answers (no required fields or answer validation there), or Google
+       would silently reject posts. */
+    const fields = new URLSearchParams();
+    fields.append(ENTRY_NAME,  name);
+    fields.append(ENTRY_PHONE, phone);
+    fields.append(ENTRY_DATE,  date);
+    fields.append(ENTRY_ORDER, orderStr);
 
-      + `&${ENTRY_PHONE}=${encodeURIComponent(phone)}`
-      + `&${ENTRY_DATE}=${encodeURIComponent(date)}`
-      + `&${ENTRY_ORDER}=${encodeURIComponent(orderStr)}`;
+    /* Fallback only: the same request as a pre-filled Google Form, offered if sending fails */
+    const prefilledUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?usp=pp_url&` + fields.toString();
 
-    /* Backup link to the same pre-filled form (the new tab can be blocked or closed) */
-    document.getElementById('order-form-link').href = formUrl;
+    const btn = document.getElementById('send-order-btn');
+    const err = document.getElementById('order-send-error');
+    if (btn.disabled) return;                       /* already sending: ignore double clicks */
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    err.hidden = true;
 
-    window.open(formUrl, '_blank');
-
-    document.getElementById('modal-form-state').style.display = 'none';
-    document.getElementById('modal-success-state').classList.add('show');
-    setTimeout(() => { const l = document.getElementById('order-form-link'); if (l) l.focus(); }, 50);
+    fetch(`https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`, {
+      method: 'POST',
+      mode:   'no-cors',
+      body:   fields
+    }).then(() => {
+      document.getElementById('modal-form-state').style.display = 'none';
+      document.getElementById('modal-success-state').classList.add('show');
+      setTimeout(() => { const h = document.getElementById('order-sent-h'); if (h) h.focus(); }, 50);
+    }).catch(() => {
+      document.getElementById('order-fallback-link').href = prefilledUrl;
+      err.hidden = false;
+      err.focus();
+    }).finally(() => {
+      btn.disabled = false;
+      btn.textContent = 'Send Order Request →';
+    });
   }
 </script>
 
